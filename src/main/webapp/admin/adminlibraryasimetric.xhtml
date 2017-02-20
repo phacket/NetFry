@@ -1,0 +1,167 @@
+<ui:composition  template = "../templates/template-policies.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <h:form>
+                <div class="col-md-12">
+                    <a href="adminlibraryalgorithms.jsf"><button type="button" class="btn btn-return">Regresar</button></a>
+                </div>
+                <div class="tbl-row">
+                    <div class="col-md-1"></div>
+                    <div class=" panel-heading col-md-10">
+                        <div class="panel">
+
+                            <div class="panel col-md-6">
+                                <div class="panel-body">
+                                    <div class="panel-heading">
+                                        <p class="panel-title text-center tittle-panel">ALGORITMO ASIMÉTRICO NUEVO</p>
+
+                                    </div>
+                                    <h:form>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-5">
+                                                <h:outputText value="Nombre del algoritmo:"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText disabled="true" value="#{libraryUpload.selected.name}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-5">
+                                                <h:outputText value="OID:"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText disabled="true" value="#{libraryUpload.selected.strOId}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-5">
+                                                <h:outputText value="Tamaño mínimo:"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText  disabled="true" value="#{libraryUpload.selected.minBits}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-5">
+                                                <h:outputText value="Tamaño máximo:"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText  disabled="true" value="#{libraryUpload.selected.maxBits}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-5">
+                                                <h:outputText value="Tamaño:"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText  disabled="true" value=""/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-5">
+                                                <h:outputText value="Seguro"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText  disabled="true" value="#{libraryUpload.selected.secure eq true ?'Seguro': 'Inseguro'}" style="#{libraryUpload.selected.secure eq true ? 'color:White;background:Green;' : 'color:White;background:Red;'}"/>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </div>
+                            </div> 
+                            <div class="panel col-md-6">
+                                <div class="panel-body">
+                                    <div class="panel-heading">
+                                        <p class="panel-title text-center tittle-panel">ALGORITMO ASIMÉTRICO EN PLATAFORMA</p>
+                                    </div>
+                                    <h:form>
+                                        <p:growl id="message" showDetail="false" />
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-5">
+                                                <h:outputText value="Nombre del algoritmo:"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText disabled="true" value="#{libraryUpload.algorithmAssy.algorithmName}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-5">
+                                                <h:outputText value="OID:" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText disabled="true" value="#{libraryUpload.algorithmAssy.oid}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-5">
+                                                <h:outputText value="Tamaño mínimo:"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText  disabled="true" value="#{libraryUpload.algorithmAssy.minBits}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-5">
+                                                <h:outputText value="Tamaño máximo:"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText  disabled="true" value="#{libraryUpload.algorithmAssy.maxBits}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-5">
+                                                <h:outputText value="Tamaño:"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText  disabled="true" value="#{libraryUpload.algorithmAssy.size}"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-5">
+                                                <h:outputText value="Seguro"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText  disabled="true" value="#{libraryUpload.algorithmAssy.secure eq 1 ?'Seguro': 'Inseguro'}" style="#{libraryUpload.algorithmAssy.secure eq 1 ? 'color:White;background:Green;' : 'color:White;background:Red;'}"/>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </div>
+                            </div>  
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        <h:button outcome="adminlibraryalgorithms" class="btn btn-default return pull-right"  value="Cancelar"></h:button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h:commandButton action="#{libraryUpload.insertAssym(libraryUpload.selected)}" class="btn btn-default return pull-left" value="Guardar"></h:commandButton>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </h:form>
+        </h:body>
+    </ui:define> 
+</ui:composition>
+

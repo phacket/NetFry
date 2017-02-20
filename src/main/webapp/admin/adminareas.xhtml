@@ -1,0 +1,70 @@
+<ui:composition  template = "../templates/template-adminprocess.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <div class="col-md-12">
+                <a href="menuadminprocess.jsf"><button type="button" class="btn btn-return">Regresar</button></a>
+            </div>
+            <div class="tbl-row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <h:form>
+                        <p:growl id="message" showDetail="false" />
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <p class="panel-title text-center tittle-panel" >ÁREAS DE LA ORGANIZACIÓN
+                                    <h:commandButton value="Agregar área"  styleClass="pull-right descargar" action="#{areaController.goToCreate()}"></h:commandButton>
+                                </p>
+                            </div>
+                            <div class="panel-body">
+
+                                <b:dataTable value="#{areaController.items}" var="item" responsive="true" lang="es" fixedHeader="true" scroll-size="200px">
+                                    <b:dataTableColumn order="desc" label="Id área">#{item.areaId}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Nombre del área">#{item.areaName}</b:dataTableColumn>
+
+                                    <h:column orderable="false">
+                                        <f:facet name="header">
+                                            <h:outputText value="Editar"></h:outputText>
+                                        </f:facet>
+                                        <b:commandButton   value="" style="padding: 0; border: none; background: none;color: #000" 
+                                                           styleClass="center-block center glyphicon glyphicon-edit" 
+                                                           action="#{areaController.goToEdit(item)}" />
+                                    </h:column>
+                                    <h:column orderable="false">
+                                        <f:facet name="header">
+                                            <h:outputText value="Eliminar"></h:outputText>
+                                        </f:facet>
+                                        <p:commandButton  value="" style="padding: 0; border: none; background: none;color: #000" styleClass="center-block glyphicon glyphicon-trash" actionListener="#{areaController.remove(item)}" update="@form">
+                                            <p:confirm header='¡Aviso!' message="#{genericprop.DeleteConfirmation}" icon="ui-icon-alert" />
+                                        </p:commandButton>
+                                    </h:column>
+                                </b:dataTable>
+
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes size" icon="ui-icon-check" />
+                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no size" icon="ui-icon-close" />
+                                </p:confirmDialog>
+
+                            </div>
+                        </div>
+                    </h:form>
+                </div>  
+            </div>
+            <script>
+                $(document).ready(function () {
+                    var table = $('table').dataTable();
+
+                    // Perform a filter
+                    table.fnFilter('');
+
+                });
+            </script>
+        </h:body>
+    </ui:define> 
+</ui:composition>

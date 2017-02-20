@@ -1,0 +1,231 @@
+<ui:composition  template = "../templates/template-adminprocess.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <div class="col-md-12">
+                <a href="adminprofileprocesses.jsf"><button type="button" class="btn btn-return2" >Regresar</button></a>
+            </div>
+            <div class="tbl-row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <p class="panel-title text-center tittle-panel">EDITAR PERFIL DE PROCESO</p>
+                        </div>
+                        <div class="panel-body">
+                            <h:form>
+                                <!--                    <p:ajaxStatus style="display:block;margin-bottom:2em;height:24px;">
+                                            <f:facet name="default">
+                                                <h:outputText value="Status: StandBy" />
+                                            </f:facet>
+                    
+                                            <f:facet name="start">
+                                                <p:graphicImage name="../resources/img/load.gif" />
+                                            </f:facet>
+                    
+                                            <f:facet name="complete">
+                                                <h:outputText value="Status: Completed" />
+                                            </f:facet>
+                                        </p:ajaxStatus>-->
+                                <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                                <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+
+                                    <p:graphicImage  value="../resources/img/ajax_loading_bar.gif" />
+
+                                </p:dialog>
+                                <p:growl id="message" showDetail="false" />
+                                <b:tabView activeIndex="0">
+                                    <b:tab title="Información del perfil" id="tprofileprocess">
+
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Nombre del perfil:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText value="#{profileProcessController.selected.profileName}" required="true" requiredMessage="El nombre del perfil es mandatorio"/>   
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Tipo de firma previa:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h:outputText value="#{profileProcessController.signatureTypeToString(profileProcessController.selected.previousSignatureType)}"/>   
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Tipo de conversión:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h:outputText value="#{profileProcessController.conversionTypeToString(profileProcessController.selected.conversionType)}"/>   
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Tipo de firma a aplicar:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h:outputText value="#{profileProcessController.signatureTypeToString(profileProcessController.selected.signatureType)}"/>   
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Grupo:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h:outputText value="#{profileProcessController.findGroupInList(profileProcessController.selected.groupId)}"/>   
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Periodo de retención:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h:outputText value="#{profileProcessController.storageTimeToString(profileProcessController.selected.storageTime)}"/>   
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        
+                                        
+<!--                                        <h:panelGroup id="panelSelect">
+                                            <div class="row">
+                                                <div class="col-md-1"></div>
+                                                <div class="col-md-4">
+                                                    <h:outputText value="Tipo de firma previa:"/> 
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h:selectOneMenu value="{profileProcessController.selected.previousSignatureType}" styleClass="form-control inputstl" disabled="true">
+                                                        <f:selectItem itemLabel="Ninguna" itemValue="0"/>
+                                                        <f:selectItem itemLabel="PDF" itemValue="1" />
+                                                        <f:selectItem itemLabel="CMS" itemValue="2"/>
+                                                        <f:selectItem itemLabel="XMLSignature" itemValue="3"/>
+                                                        <p:ajax event="change" listener="{profileProcessController.Change()}" update="panelSelect"/>
+
+                                                    </h:selectOneMenu>  
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-1"></div>
+                                                <div class="col-md-4">
+                                                    <h:outputText value="Tipo de conversión:"/> 
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h:selectOneMenu  value="{profileProcessController.selected.conversionType}"  styleClass="form-control inputstl" disabled="true">
+                                                        <f:selectItem itemLabel="Sin conversión" itemValue="0"/>
+                                                        <f:selectItem itemLabel="Office a PDF/A" itemValue="1" />
+                                                        <f:selectItem itemLabel="PDF/A" itemValue="2" />
+                                                        <p:ajax event="change" listener="#profileProcessController.Change2()}" update="panelSelect"/>
+
+
+                                                    </h:selectOneMenu>  
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-1"></div>
+                                                <div class="col-md-4">
+                                                    <h:outputText value="Tipo de firma a aplicar:"/> 
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h:selectOneMenu value="{profileProcessController.selected.signatureType}" disabled="true" styleClass="form-control inputstl">
+                                                        <f:selectItem itemLabel="Ninguna" itemValue="0"/>
+                                                        <f:selectItem itemLabel="PDF" itemValue="1" />
+                                                        <f:selectItem itemLabel="CMS" itemValue="2"/>
+                                                        <f:selectItem itemLabel="XMLSignature" itemValue="3"/>
+
+                                                    </h:selectOneMenu>  
+                                                </div>
+                                            </div>
+
+                                        </h:panelGroup>
+
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Grupo:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:selectOneMenu value="{profileProcessController.selected.groupId}" disabled="true">
+                                                    <f:selectItems value="{profileProcessController.profileGroups}" var="item" itemLabel="#{item.groupName}" itemValue="#{item.groupId}" />
+                                                </b:selectOneMenu> 
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-10">
+                                                <b:slider handle-size="lg" handle-shape="round" min="1" max="100"    
+                                                          inline="true"
+                                                          value="{profileProcessController.selected.storageTime}"
+                                                         step="1"  label="Periodo de retención mes(es)"
+                                                          />
+
+                                            </div>
+                                            <div class="col-md-1"></div>
+                                        </div>-->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h:button outcome="adminprofileprocesses" class="btn btn-default return pull-right" id="cancel-profile" value="Cancelar"></h:button>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <h:commandButton  class="btn btn-default return pull-left" id="next-profile" value="Guardar" action="#{profileProcessController.update(profileProcessController.selected)}"></h:commandButton>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                            </div>
+
+                                            <div class="col-md-6">
+                                            </div>
+                                        </div>
+                                    </b:tab>
+                                    <b:tab title="Agregar llaves HSM" id="addhsmkey">
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="panel-body col-md-11">
+
+                                                <p:pickList addAllLabel="Agregar todo" addLabel="Agregar" removeAllLabel="Quitar todo" removeLabel="Quitar" id="pickList" 
+                                                            moveUpLabel="Arriba" moveDownLabel="Abajo" moveTopLabel="Primero" moveBottomLabel="Último" value="#{profileProcessController.HSMKeys}" var="elem" responsive="true"  
+                                                            itemLabel="#{elem.keyTag}" itemValue="#{elem}" styleClass="picklist size"  showTargetControls="true" converter="entityConverter">
+                                                    <p:ajax event="transfer" listener="#{profileProcessController.ontransfer}" update="message pickList"/>
+                                                    <p:ajax event="reorder" listener="#{profileProcessController.onReorder}" update="message pickList"/>
+                                                    <f:facet name="sourceCaption" class="picklistFacet">Llaves del sistema</f:facet>
+                                                    <f:facet name="targetCaption" class="picklistFacet">Llaves del perfil</f:facet>
+                                                </p:pickList>                                   
+                                            </div>
+                                        </div>
+                                    </b:tab>
+                                </b:tabView>
+
+                            </h:form>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+            <script>
+                (function ($) {
+                    $.extend(PrimeFaces.widget.PickList.prototype, {
+                        _old_saveState: PrimeFaces.widget.PickList.prototype.saveState,
+                        saveState: function () {
+                            this._old_saveState();
+                            // TODO: call custom functionality here, such as calling a p:remoteCommmand
+                        }
+                    });
+                })(jQuery);
+            </script>
+        </h:body>
+    </ui:define> 
+</ui:composition>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition  template = "../templates/template-policies.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <div class="col-md-12">
+                <a href="menupolicies.jsf"><button type="button" class="btn btn-return2">Regresar</button></a>
+            </div>
+            <div class="tbl-row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <p class="panel-title text-center tittle-panel">CARGAR LIBRERÍA DE ALGORÍTMOS</p>
+                        </div>
+                        <div class="panel-body">                                                         
+                            <b:tabView contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px">
+                                <b:tab title="Algoritmos asimétricos">                                    
+                                    <h:form>
+                                        <p:growl id="message" showDetail="false" />
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-5">
+
+                                                <b:dataTable value="#{libraryUpload.items}" paginated="false" searching="false" var="item" lang="es">
+                                                    <b:dataTableColumn label="Algortimos nuevos" >#{item.name}</b:dataTableColumn>
+                                                    <h:column orderable="false">
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Seleccionar"></h:outputText>
+                                                        </f:facet>
+                                                        <b:commandButton  value="" action="#{libraryUpload.gotoAssyAlg(item)}" style="padding: 0; border: none; background: none;color: #000" styleClass="center-block center glyphicon glyphicon-import">
+                                                        </b:commandButton>
+                                                    </h:column>
+                                                </b:dataTable>
+
+                                            </div>
+                                            <div class="col-md-5">
+                                                <b:dataTable value="#{libraryUpload.listdbassy}" paginated="false" searching="false" var="item" lang="es">
+                                                    <b:dataTableColumn label="Algortimos en plataforma" >#{item.algorithmName}</b:dataTableColumn>
+                                                </b:dataTable>
+                                            </div>
+                                        </div>
+
+                                    </h:form> 
+
+                                </b:tab>
+                                <b:tab title="Algoritmos hash">
+                                    <h:form>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-5">
+                                                <b:dataTable value="#{libraryUpload.itemsHash}" paginated="false" searching="false" var="item" lang="es">
+                                                    <b:dataTableColumn label="Algortimos nuevos" >#{item.name}</b:dataTableColumn>
+                                                    <h:column orderable="false">
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Seleccionar"></h:outputText>
+                                                        </f:facet>
+                                                        <b:commandButton  value="" action="#{libraryUpload.gotoHash(item)}" style="padding: 0; border: none; background: none;color: #000" styleClass="center-block center glyphicon glyphicon-import">
+                                                        </b:commandButton>
+                                                    </h:column>
+                                                </b:dataTable>
+                                            </div>
+                                            <div class="col-md-5">
+
+                                                <b:dataTable value="#{libraryUpload.listdbHash}" paginated="false" searching="false" var="item" lang="es">
+                                                    <b:dataTableColumn label="Algortimos en plataforma" >#{item.algorithmName}</b:dataTableColumn>
+                                                </b:dataTable>
+
+                                            </div>
+                                        </div>
+
+                                    </h:form> 
+
+                                </b:tab>
+                                <b:tab title="Algoritmos de firma">
+                                    <h:form>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-5">
+                                                <b:dataTable value="#{libraryUpload.itemsSign}" paginated="false" searching="false" var="item" lang="es">
+                                                    <b:dataTableColumn label="Algortimos nuevos" >#{item.name}</b:dataTableColumn>
+                                                    <h:column orderable="false">
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Seleccionar"></h:outputText>
+                                                        </f:facet>
+                                                        <b:commandButton  value="" action="#{libraryUpload.gotoSignAlgs(item)}" style="padding: 0; border: none; background: none;color: #000" styleClass="center-block center glyphicon glyphicon-import">
+                                                        </b:commandButton>
+                                                    </h:column>
+                                                </b:dataTable>
+                                            </div>
+                                            <div class="col-md-5">
+
+                                                <b:dataTable value="#{libraryUpload.listdbSign}" paginated="false" searching="false" var="item" lang="es">
+                                                    <b:dataTableColumn label="Algortimos en plataforma" >#{item.algorithmName}</b:dataTableColumn>
+                                                </b:dataTable>
+
+                                            </div>
+                                        </div>
+
+
+                                    </h:form> 
+
+                                </b:tab>
+                            </b:tabView>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+            <script>
+                $(document).ready(function () {
+                    var table = $('table').dataTable();
+
+                    // Perform a filter
+                    table.fnFilter('');
+
+                });
+            </script>
+        </h:body>
+    </ui:define> 
+</ui:composition>

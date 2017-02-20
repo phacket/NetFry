@@ -1,0 +1,84 @@
+<ui:composition  template = "../templates/template-monitoring.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"
+                 xmlns:b="http://bootsfaces.net/ui"> 
+    <ui:define  name = "content" >
+        <h:body>
+            <b:container>
+                <b:row>
+                    <div class="tbl-row">
+                        <b:column span="2"></b:column>
+                        <b:column span="4">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h:form>
+                                        <p:commandLink action="#{userLogReportControllerAdmin.fillControls()}">
+                                            <div class="m-mon">
+                                                <img src="../resources/img/iconos/ico-userlog.png" class="m-icon icon-ul"/>
+                                                <br/><strong>Acceso de Administradores</strong>
+                                            </div>
+                                        </p:commandLink>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </b:column>
+                        <b:column span="4">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h:form>
+                                        <p:commandLink action="#{auditTrailReportControllerAdmin.fillControls()}">
+                                            <div class="m-mon">
+                                                <img src="../resources/img/iconos/ico-audittrial.png" class="m-icon icon-at"/>
+                                                <br/><strong>Auditoría de Administradores</strong>
+                                            </div>
+                                        </p:commandLink>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </b:column>
+                        <b:column span="2"></b:column>
+                        <br/>
+                    </div>
+                </b:row>
+                <b:row>
+                    <div class="tbl-row">
+                        <b:column span="2"></b:column>
+                        <b:column span="4">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h:form>
+                                        <p:commandLink action="#{userLogReportControllerUser.fillControls()}">
+                                            <div class="m-mon">
+                                                <img src="../resources/img/iconos/ico-userlog.png" class="m-icon icon-ul"/>
+                                                <br/><strong>Acceso de Usuarios</strong>
+                                            </div>
+                                        </p:commandLink>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </b:column>
+                        <b:column span="4">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h:form>
+                                        <p:commandLink action="#{auditTrailReportControllerUser.fillControls()}">
+                                            <div class="m-mon">
+                                                <img src="../resources/img/iconos/ico-audittrial.png" class="m-icon icon-at"/>
+                                                <br/><strong>Auditoría de Usuarios</strong>
+                                            </div>
+                                        </p:commandLink>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </b:column>
+                        <b:column span="2"></b:column>
+                        <br/>
+                    </div>
+                </b:row>
+            </b:container>
+        </h:body>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,576 @@
+<ui:composition  template = "../templates/template-adminprocess.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+
+
+        <h:body>
+            <div class="col-md-12">
+                <a href="menuusers.jsf"><button type="button" class="btn btn-return" >Regresar</button></a>
+            </div>
+            <div class="tbl-row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <p class="panel-title text-center tittle-panel">AGREGAR USUARIO ADMINISTRADOR</p>
+                        </div>
+                        <div class="panel-body">
+                            <h:form id="form">
+                                <p:growl id="message" showDetail="false" widgetVar="growlWV" globalOnly="true"/>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="panel">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-5">
+
+                                                        <h:outputText value="*Nombre:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="nombre"/>
+                                                        <b:inputText id="nombre" value="#{usersController.selected.firstName}" required="true" requiredMessage="El nombre es mandatorio" >
+                                                            <f:ajax event="keyup" execute="@this" render="commonName"/>
+                                                        </b:inputText>    
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="*Apellido paterno:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="apaterno"/>
+                                                        <b:inputText id="apaterno" value="#{usersController.selected.middleName}" required="true" requiredMessage="El apellido paterno es mandatorio">
+                                                            <f:ajax event="keyup" execute="@this" render="commonName"/>
+                                                        </b:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="*Apellido materno:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="amaterno"/>
+                                                        <b:inputText id="amaterno" value="#{usersController.selected.lastName}" required="true" requiredMessage="El apellido materno es mandatorio">
+                                                            <f:ajax event="keyup" execute="@this" render="commonName"/>
+                                                        </b:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="*Nombre de usuario:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="commonName"/>
+                                                        <b:inputText id="commonName" disabled="true" value="#{usersController.getFullName()}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="*Teléfono:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="telNumber"/>
+                                                        <b:inputText value="#{usersController.selected.telNumber}" required="true" requiredMessage="El teléfono es mandatorio" id="telNumber">
+                                                            <f:validator validatorId="telnumbervalidator"/>
+                                                        </b:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="*Calle:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="calle"/>
+                                                        <b:inputText id="calle" value="#{usersController.selected.calle}" required="true" requiredMessage="La calle es mandatorio"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="*Número exterior:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="numeroExt"/>
+                                                        <b:inputText value="#{usersController.selected.numero}" required="true" requiredMessage="El número es mandatorio" id="numeroExt"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="*Código postal:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="cpostal"/>
+                                                        <b:inputText id="cpostal" value="#{usersController.selected.codigoPostal}" required="true" requiredMessage="El código postal es mandatorio">
+                                                            <f:validator validatorId="zipcodevalidator"/>
+                                                        </b:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="*Municipio:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="municipio"/>
+                                                        <b:inputText id="municipio" value="#{usersController.selected.municipio}" required="true" requiredMessage="El municipio es mandatorio"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="*Colonia:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="colonia"/>
+                                                        <b:inputText id="colonia" value="#{usersController.selected.colonia}" required="true" requiredMessage="La colonia es mandatoria"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="*Estado:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="estado"/>
+                                                        <b:inputText id="estado" value="#{usersController.selected.estado}" required="true" requiredMessage="El estado es mandatorio"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="panel">
+                                            <div class="panel-body">
+
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="*Área:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="area"/>
+                                                        <b:selectOneMenu value="#{usersController.selected.areaId}" id="area">
+
+                                                            <f:selectItems value="#{areaController.items}" var="item" itemLabel="#{item.areaName}" itemValue="#{item.areaId}" />
+
+                                                        </b:selectOneMenu>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="*RFC:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="rfc"/>
+                                                        <b:inputText id="rfc" value="#{usersController.selected.rfc}" required="true" requiredMessage="El RFC es mandatorio" onkeyup="validRfc()">
+                                                            <f:validator validatorId="validaterfc"/>
+                                                        </b:inputText>
+                                                        <p id="rfcmsg"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="*CURP:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="curp"/>
+                                                        <b:inputText id="curp" value="#{usersController.selected.curp}" required="true" requiredMessage="El CURP campo es mandatorio" onkeyup="validCurp()">
+                                                            <f:validator validatorId="validatecurp"/>
+                                                        </b:inputText>
+                                                        <p id="curp"></p>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="*País:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="country"/>
+                                                        <b:selectOneMenu id="country" value="#{usersController.selected.countryCode}" >
+                                                            <f:selectItems    value="#{usersController.availableLocale}" var="item" itemLabel="#{item.nombrePais}" itemValue="#{item.codigoPais}" />
+                                                        </b:selectOneMenu>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="*Correo electrónico:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="email"/>
+                                                        <b:inputText id="email" value="#{usersController.selected.email}" required="true" requiredMessage="El correo electrónico es mandatorio" onkeyup="validEmail()">
+                                                            <f:validator validatorId="validateEmail"/>
+                                                        </b:inputText>
+                                                        <p id="emailmsg"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="*Tamaño de la llave:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="keySize"/>
+                                                        <b:selectOneMenu id="keySize" value="#{usersController.selected.keySizeBits}" binding="#{keysize}">
+                                                            <f:selectItem itemLabel="1024" itemValue="1024"/>
+                                                            <f:selectItem itemLabel="2048" itemValue="2048"/>
+                                                            <f:selectItem itemLabel="3072" itemValue="3072"/>
+                                                        </b:selectOneMenu>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="*Clave de anulación:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="password2"/>
+                                                        <b:inputSecret value="#{usersController.selected.challengePrase}" id="password2" required="true" requiredMessage="La clave de anulación es mandatoria" binding="#{passtext2}" styleClass="pwd">
+                                                            <f:validator validatorId="passwordValidation" />
+                                                            <f:attribute name="confirm" value="#{confirmPassword2.submittedValue}" />
+                                                            <f:ajax event="blur" execute="password2 confirm2" render="m_password2" />
+                                                        </b:inputSecret>
+                                                        <b:message id="m_password2" for="password2" />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="*Confirmar Clave"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="confirm2"/>
+                                                        <b:inputSecret value="#{usersController.passwordValidate}" id="confirm2" binding="#{confirmPassword2}" required="true" requiredMessage="La validación de la clave es mandatoria" styleClass="pwd">
+                                                            <f:ajax event="blur" execute="password2 confirm2" render="m_password2 m_confirm2" />
+                                                        </b:inputSecret>
+                                                        <b:message id="m_confirm2" for="confirm2" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="*Contraseña:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="password"/>
+                                                        <b:inputSecret value="#{usersController.selected.password}" id="password" required="true" requiredMessage="La contraseña es mandatoria" binding="#{passtext}" styleClass="pwd" autocomplete="false">
+                                                            <f:validator validatorId="passwordValidation" />
+                                                            <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
+                                                            <f:ajax event="blur" execute="password confirm" render="m_password" />
+                                                        </b:inputSecret>
+                                                        <b:message id="m_password" for="password" />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="*Confirmar contraseña:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="confirm"/>
+                                                        <b:inputSecret value="#{usersController.passwordValidate}" id="confirm" required="true" requiredMessage="La validación de la contraseña es mandatoria" binding="#{passtextConfirm}" styleClass="pwd" autocomplete="false">
+                                                            <f:ajax event="blur" execute="password confirm" render="m_password m_confirm" />
+                                                        </b:inputSecret>
+                                                        <b:message id="m_confirm" for="confirm" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="*Fecha de vencimiento:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+
+                                                        <div class="ui-fluid">
+
+                                                            <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank">
+                                                                <b:message for="cdate1"/>
+                                                                <p:calendar  id="cdate1"  mindate="#{now}" readonlyInput="true" required="true" placeholder="Fecha de vencimiento" pattern="dd/MMMMM/yyyy"  navigator="true"  value="#{usersController.selected.certVencimiento}" requiredMessage="La fecha de vencimiento es mandatoria"/>
+                                                            </p:panelGrid>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-md-12">
+                                    <div class="col-md-3">
+                                        <b:button onclick="genMyKeys()"   value="1.- Generar requerimiento" class="btn btn-return pull-right cancel" id="req" binding="#{req}" disabled="#{usersController.btnReq}"/>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <b:commandButton value="2.- Generar certificado" id="btnReq" action="#{usersController.requestCert()}" class="btn btn-return pull-right cancel" disabled="#{usersController.btnCer}"/>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <b:button onclick="doCodePKCS12()" value="3.- Generar llave privada" class="btn btn-return pull-right cancel"  id="dopkcs1" disabled="#{usersController.btnDoPKCS12}"/>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <b:commandButton action="#{usersController.insertaAdmin()}" value="4.- Guardar" class="btn btn-return pull-right cancel"/>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <b:commandButton actionListener="#{usersController.test()}" value="4.- test" class="btn btn-return pull-right cancel"/>
+                                    </div>
+                                    <h:inputText  id="privatekey"  value="#{usersController.privateKey}" binding="#{privatekey}" style="visibility: hidden"/>
+                                    <h:inputText  id="publickey"  value="#{usersController.publicKey}" binding="#{publickey}" style="visibility: hidden"/>
+                                    <h:inputText value="#{usersController.certUser}" id="certificate" binding="#{certificate}" style="visibility: hidden"/>
+                                    <h:inputText value="#{usersController.cerAut}" id="certificateAc" binding="#{certificateAc}" style="visibility: hidden"/>
+                                    <h:inputText value="#{usersController.pfx}" id="pfx" binding="#{pfx}" style="visibility: hidden"/>
+                                </div>
+
+                            </h:form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <script src="lib/SgData_SgLibJSv1.3.js"/>
+            <script type="text/javascript">
+
+
+                                            $(document).ready(function () {
+
+                                                $("#input_form\\:telNumber").mask("9999999999");
+                                                $("#input_form\\:cpostal").mask("99999");
+                                                $("#input_form\\:rfc").mask("AAAAAAAAAAAAA");
+                                                $("#input_form\\:curp").mask("AAAAAAAAAAAAAAAAAA");
+
+
+                                                $("#input_form\\:telNumber").on("blur", function () {
+
+                                                    var txt = $("#input_form\\:telNumber").val().replace("-", "").replace("-", "");
+
+                                                    $(this).val(txt);
+                                                    console.log(txt);
+
+                                                });
+
+                                            });
+
+                                            function validEmail() {
+
+                                                var email = document.getElementById("input_form:email").value;
+
+
+                                                var pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+                                                if (pattern.test(email)) {
+
+                                                    $("#emailmsg").html("Formato de email correcto");
+                                                    $("#emailmsg").css('color', 'green');
+
+                                                } else
+                                                {
+                                                    $("#emailmsg").html("Formato de email incorrecto");
+                                                    $("#emailmsg").css('color', 'red');
+
+                                                }
+                                            }
+                                            function validCurp() {
+
+                                                var curp = document.getElementById("input_form:curp").value;
+
+
+                                                var pattern = /^[A-Z]{1}[AEIOU]{1}[A-Z]{2}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[HM]{1}(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[0-9A-Z]{1}[0-9]{1}$/;
+
+                                                if (pattern.test(curp)) {
+
+                                                    $("#curp").html("Formato de CURP correcto");
+                                                    $("#curp").css('color', 'green');
+
+                                                } else
+                                                {
+                                                    $("#curp").html("Formato de CURP incorrecto");
+                                                    $("#curp").css('color', 'red');
+
+                                                }
+
+
+                                            }
+
+                                            function validRfc() {
+                                                var rfc = document.getElementById("input_form:rfc").value;
+
+
+                                                var pattern = /^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[A-Z|\d]{3})$/;
+                                                if (pattern.test(rfc)) {
+
+                                                    $("#rfcmsg").html("Formato de RFC correcto");
+                                                    $("#rfcmsg").css('color', 'green');
+
+                                                } else
+                                                {
+                                                    $("#rfcmsg").html("Formato de RFC incorrecto");
+                                                    $("#rfcmsg").css('color', 'red');
+
+                                                }
+
+                                            }
+
+                                            function genMyKeys() {
+
+                                                try {
+
+
+                                                    console.log("Inicia proceso de generacion");
+//                                                    var nombre=document.getElementById("input_form:nombre").value;
+//                                                    var apaterno=document.getElementById("input_form:apaterno").value;
+//                                                    var amaterno=document.getElementById("input_form:amaterno").value;
+//                                                    var tel=document.getElementById("").value;
+//                                                    var calle=document.getElementById("").value;
+//                                                    var nombre=document.getElementById("").value;
+//                                                    var cp=document.getElementById("").value;
+//                                                    var municipio=document.getElementById("").value;
+//                                                    var colonia=document.getElementById("").value;
+//                                                    var estado=document.getElementById("").value;
+//                                                    var area=document.getElementById("").value;
+//                                                    var rfc=document.getElementById("").value;
+//                                                    var curp=document.getElementById("").value;
+//                                                    var email=document.getElementById("").value;
+//                                                    var claveAnu=document.getElementById("").value;
+//                                                    var claveAnuConfirm=document.getElementById("").value;
+
+
+                                                    var keySize_ = document.getElementById("#{keysize.clientId}Inner").value;
+                                                    console.log('Key Size');
+                                                    console.log(keySize_.toString());
+                                                    var privateKeyPass_ = document.getElementById("input_#{passtext.clientId}").value;
+                                                    console.log('Password');
+                                                    console.log(privateKeyPass_.toString());
+                                                    var passValid = document.getElementById("input_#{passtextConfirm.clientId}").value;
+                                                    console.log('Antes');
+                                                    if (keySize_ === "") {
+                                                        PF('growlWV').renderMessage({"summary": "Información!",
+                                                            "detail": "Para generar el requerimiento es necesario el tamaño de la llave",
+                                                            "severity": "warn"});
+                                                        //alert("Para generar el requerimiento es necesario el tamaño de la llave");
+                                                    } else
+                                                    if (privateKeyPass_ !== passValid) {
+
+                                                        PF('growlWV').renderMessage({"summary": "Información!",
+                                                            "detail": "Las contraseñas no coinciden",
+                                                            "severity": "warn"});
+                                                    } else
+                                                    if (privateKeyPass_ === "") {
+
+                                                        PF('growlWV').renderMessage({"summary": "Información!",
+                                                            "detail": "Para generar el requerimiento es necesario la contraseña",
+                                                            "severity": "warn"});
+                                                        // alert("Para generar el requerimiento es necesario la contraseña");
+                                                    } else {
+
+                                                        genKeys(keySize_, privateKeyPass_, function (error, result) {
+                                                            if (error)
+                                                            {
+
+                                                                PF('growlWV').renderMessage({"summary": "Información!",
+                                                                    "detail": "Se ha generado un error al generar el requerimiento",
+                                                                    "severity": 0});
+                                                            } else {
+                                                                //alert(result.privateKey);
+                                                                console.log('---------KeySize----------');
+                                                                console.log(result.keySize);
+                                                                console.log('---------PrivateKey--------');
+                                                                console.log(result.privateKey);
+                                                                console.log('---------PublicKey----------');
+                                                                console.log(result.publicKey);
+                                                                //document.getElementById("CertRequest").value = result.keySize;
+                                                                document.getElementById("#{publickey.clientId}").value += result.publicKey;
+                                                                document.getElementById("#{privatekey.clientId}").value += result.privateKey;
+                                                                $("#form\\:req").prop("disabled", true);
+                                                                $("#form").on('submit',function (e) {
+                                                                    e.preventDefault();
+                                                                    alert("Submitted");
+                                                                });
+                                                                PF('growlWV').renderMessage({"summary": "Información!",
+                                                                    "detail": "El requerimiento se ha generado correctamente",
+                                                                    "severity": "info"});
+
+
+                                                            }
+
+                                                        });
+                                                    }
+
+
+
+                                                } catch (exc) {
+
+                                                    PF('growlWV').renderMessage({"summary": "Información!",
+                                                        "detail": exc,
+                                                        "severity": 0});
+                                                }
+
+
+                                            }
+
+                                            function doCodePKCS12() {
+                                                try {
+                                                    var certificate = document.getElementById('#{certificate.clientId}').value;
+                                                    console.log("Certificado User " + certificate);
+                                                    var certificateAc = document.getElementById('#{certificateAc.clientId}').value;
+                                                    console.log("Certificado autoridad " + certificateAc);
+                                                    var privKey = document.getElementById('#{privatekey.clientId}').value;
+                                                    console.log("PrivateKey " + privKey);
+                                                    var password = document.getElementById('input_#{passtext.clientId}').value;
+                                                    console.log("Password " + password);
+                                                    var pfx = document.getElementById('#{pfx.clientId}');
+                                                    console.log("Pfx " + pfx);
+                                                    console.log("--------------------------------------------------------------------------------");
+                                                    console.log("cerfitifate " + certificate);
+                                                    console.log("Certifdicado Autoridad " + certificateAc);
+                                                    console.log("llave privada " + privKey);
+                                                    console.log("Password " + password);
+                                                    if (certificate === "") {
+
+                                                        PF('growlWV').renderMessage({"summary": "Información!",
+                                                            "detail": "Para generar la llave primaria es necesario el certificado del usuario",
+                                                            "severity": "warn"});
+                                                    } else
+                                                    if (certificateAc === "") {
+                                                        PF('growlWV').renderMessage({"summary": "Información!",
+                                                            "detail": "Para generar la llave primaria es necesario el certificado de la autoridad certificadora",
+                                                            "severity": "warn"});
+                                                    } else
+                                                    if (privKey === "") {
+                                                        PF('growlWV').renderMessage({"summary": "Información!",
+                                                            "detail": "Para generar la llave primaria es necesario la llave privada",
+                                                            "severity": "warn"});
+                                                    } else
+                                                    if (password === "") {
+                                                        PF('growlWV').renderMessage({"summary": "Información!",
+                                                            "detail": "Para generar la llave primaria es necesario la contraseña",
+                                                            "severity": "warn"});
+                                                    } else {
+
+                                                        SgData_CodePKCS12(["-----BEGIN CERTIFICATE-----" + certificate + "-----END CERTIFICATE-----", "-----BEGIN CERTIFICATE-----" + certificateAc + "-----END CERTIFICATE-----"], privKey, password, function (error, result) {
+                                                            if (error) {
+                                                                PF('growlWV').renderMessage({"summary": "Información!",
+                                                                    "detail": error,
+                                                                    "severity": 0});
+                                                            } else {
+                                                                pfx.value = result;
+                                                                console.log("Valor pfx " + result);
+                                                                $("#form\\:dopkcs1").prop("disabled", true);
+                                                                PF('growlWV').renderMessage({"summary": "Información!",
+                                                                    "detail": "La llave primaria se ha generado correctamente",
+                                                                    "severity": "info"});
+                                                            }
+                                                        });
+                                                    }
+
+                                                } catch (exc) {
+
+                                                    PF('growlWV').renderMessage({"summary": "Información!",
+                                                        "detail": "Se ha generado un error al generar la llave primaria",
+                                                        "severity": 0});
+                                                }
+                                            }
+
+
+
+            </script>
+
+        </h:body>
+    </ui:define> 
+</ui:composition>

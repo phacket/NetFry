@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b ="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <h:head>
+        <link href="../resources/css/style.css" type="text/css" rel="stylesheet" />  
+        <link href="../resources/css/bootstrap.min.css" type="text/css" rel="stylesheet" /> 
+        <link href="../resources/css/font-awesome.min.css" type="text/css" rel="stylesheet" /> 
+        <link href="../resources/css/bootstrap-theme.min.css" rel="stylesheet"/> 
+        <link href="../resources/css/animate.css" rel="stylesheet"/>
+        <link href="../resources/css/style.css" rel="stylesheet"/>
+        <script src="../resources/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../resources/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../resources/js/App.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../resources/js/appScripts.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../resources/js/jquery-ui.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../resources/js/jquery-ui-min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../resources/js/jquery.mask.js" type="text/javascript" charset="utf-8"></script>
+        <title>SeguriBox LTV</title>
+    </h:head>
+    <h:body>
+        <header>
+            <div class="sd-header-policies">
+                <img src="../resources/img/logomain.png" class="img-header" onclick="parent.location = '../index.jsf'"/>
+                <div class="user-info">
+                    <h:form>
+                        <h:outputText value="#{loginController.fullName}" styleClass="user"/>
+                        <!--<a href="../login.jsf" class="user">Salir</a>-->
+                        <b:commandButton  action="#{loginController.logout()}" icon="log-out" value="Salir" styleClass="policies user2"/>
+                    </h:form>	
+                    <div class="tittle-header">
+                        Políticas de Algoritmos
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="opc-row">
+            <div class="col-md-12">
+                <button type="button" class="btn return" id="return-home">Inicio</button>
+            </div>
+        </div>
+    </h:body>
+</html>

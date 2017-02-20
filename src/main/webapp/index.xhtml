@@ -1,0 +1,128 @@
+<ui:composition  template = "templateIndex.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"
+                 xmlns:b="http://bootsfaces.net/ui"> 
+    <ui:define  name = "content" >
+        <h:body>
+            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+
+                <p:graphicImage  value="resources/img/ajax_loading_bar.gif" />
+
+            </p:dialog>
+            <div id="main-menu">
+                <b:container>
+                    <b:row>
+                        <div class="m-row">
+                            <b:column span="3"></b:column>
+                            <b:column span="6">
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <h:form>
+                                            <p:commandLink action="#{documentController.fillControls()}">
+                                                <div class="m-doc" >
+                                                    <img src="resources/img/iconos/ico-documentos.png" class="m-icon"/>
+                                                    <br/><strong> Administración de Documentos</strong>
+                                                </div>
+                                            </p:commandLink>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </b:column>
+                            <b:column span="3"></b:column>
+                        </div>
+                    </b:row>
+                    <b:row>
+                        <div class="m-row">
+                            <b:column span="2"></b:column>
+                            <b:column span="4">
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <h:form>
+                                            <p:commandLink action="#{redirectUtil.goToMenuAdminPro()}">
+                                                <div class="m-seg" id="adminprocess">
+                                                    <img src="resources/img/iconos/ico-adminpro.png" class="m-icon-adminprocess"/>
+                                                    <br/><strong>Administración de Procesos</strong>
+                                                </div>
+                                            </p:commandLink>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </b:column>
+                            <b:column span="4">
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <h:form>
+                                            <p:commandLink action="#{redirectUtil.goToMenuMonitoring()}">
+                                                <div class="m-mon" id="monitoring">
+                                                    <img src="resources/img/iconos/ico-monitoreo.png" class="m-icon"/>
+                                                    <br/><strong>Monitoreo</strong>
+                                                </div>
+                                            </p:commandLink>
+                                        </h:form>
+
+                                    </div>
+                                </div>
+                            </b:column>
+                            <b:column span="2"></b:column>
+                        </div>
+                    </b:row>
+                    <b:row>
+                        <div class="m-row">
+                            <b:column span="4">
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <h:form>
+                                            <p:commandLink action="#{redirectUtil.goToMenuReports()}">
+                                                <div class="m-rep" id="reports">
+                                                    <img src="resources/img/iconos/ico-reportes.png" class="m-icon"/>
+                                                    <br/><strong>Reportes</strong>
+                                                </div>
+                                            </p:commandLink>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </b:column>
+
+                            <b:column span="4">
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <h:form>
+                                            <p:commandLink action="#{redirectUtil.goToMenuPoli()}">
+                                                <div class="m-pol" id="policies">
+                                                    <img src="resources/img/iconos/ico-algoritmos.png" class="m-icon"/>
+                                                    <br/><strong>Políticas de Algoritmos</strong>
+                                                </div>
+                                            </p:commandLink>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </b:column>
+                            <b:column span="4">
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <h:form>
+                                            <p:commandLink action="#{systemParametersController.fillControls()}">
+                                                <div class="m-con" >
+                                                    <img src="resources/img/iconos/ico-configuracion.png" class="m-icon" />
+                                                    <br/><strong> Configuración</strong>
+                                                </div>
+                                            </p:commandLink>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </b:column>
+                            <br/>
+                        </div>
+                    </b:row>
+                </b:container>
+                <p:growl id="message" showDetail="false" />
+                <br/>
+                <br/>
+            </div>
+        </h:body>
+    </ui:define>
+</ui:composition>

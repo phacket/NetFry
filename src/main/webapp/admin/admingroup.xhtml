@@ -1,0 +1,149 @@
+<ui:composition  template = "../templates/template-adminprocess.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+
+                <p:graphicImage  value="../resources/img/ajax_loading_bar.gif" />
+
+            </p:dialog>
+            <h:form>
+                <p:growl id="message" showDetail="false" />
+                <div class="col-md-12">
+                    <a href="admingroups.jsf"><button type="button" class="btn btn-return">Regresar</button></a>
+                </div>
+                <div class="tbl-row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <p class="panel-title text-center tittle-panel">EDITAR GRUPOS</p>
+                                <p class="panel-title text-center tittle-panel"><h5 class="text-center">(#{groupsController.selected.groupName})</h5></p>
+
+                            </div>
+
+                            <div class="panel-body">
+                                <b:tabView activeIndex="0">
+                                    <b:tab title="Grupos" id="tgroups">
+                                        <div class="row col-md-12">
+                                            <div class="col-md-1"/>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Nombre del grupo:"/> 
+                                            </div>
+                                            <div class="col-md-7">
+                                                <b:inputText value="#{groupsController.selected.groupName}" required="true" required-message="El nombre del  grupo es mandatorio"/>   
+                                            </div>
+                                        </div>
+                                        <div class="row col-md-12">
+                                            <div class="col-md-1"/>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Descripción:"/> 
+                                            </div>
+                                            <div class="col-md-7">
+                                                <b:inputTextarea rows="2" value="#{groupsController.selected.description}" required="true" required-message="El campo descripción es mandatorio"></b:inputTextarea>
+                                            </div>
+                                        </div>
+                                        <div class="row col-md-12">
+                                            <div class="col-md-1"/>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Tipo de grupo:"/> 
+                                            </div>
+                                            <div class="col-md-7">
+                                                <b:inputText value="#{groupsController.selected.profileTypeStr()}" disabled="true"/>   
+                                            </div>
+                                        </div>
+                                        <div class="row col-md-12">
+                                            <div class="col-md-6">
+                                                <h:button outcome="admingroups" class="btn btn-default return pull-right" value="Cancelar"></h:button>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h:commandButton action="#{groupsController.insert(groupsController.selected)}" class="btn btn-default return pull-left" value="Guardar"></h:commandButton>
+                                            </div>
+                                        </div>
+                                    </b:tab>
+                                    <b:tab title="Usuarios" id="tabusers">
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="panel-body col-md-11">
+
+                                                <p:pickList addAllLabel="Agregar todo" addLabel="Agregar" removeAllLabel="Quitar todo" removeLabel="Quitar"  id="pickListUser" value="#{groupsController.users}" var="elem"  responsive="true"
+                                                            itemLabel="#{elem.username}" itemValue="#{elem}" styleClass="picklist size" converter="entityConverter">
+                                                    <p:ajax event="transfer" listener="#{groupsController.onTransferUsers}" update="message pickListUser"/>
+                                                    <f:facet name="sourceCaption" class="picklistFacet">Usuarios</f:facet>
+                                                    <f:facet name="targetCaption" class="picklistFacet">Usuarios en grupos</f:facet>
+                                                </p:pickList>  
+                                            </div>
+                                        </div>
+                                    </b:tab>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <b:tab title="Llaves" id="tabhsmkey">
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="panel-body col-md-11">
+                                                <p:pickList addAllLabel="Agregar todo" addLabel="Agregar" removeAllLabel="Quitar todo" removeLabel="Quitar"  id="pickListHsmkey" value="#{groupsController.hsmkey}" var="elem"  responsive="true"
+                                                            itemLabel="#{elem.keyTag}" itemValue="#{elem}" styleClass="picklist size" converter="entityConverter">
+                                                    <p:ajax event="transfer" listener="#{groupsController.onTransferHsmkey}" update="message pickListHsmkey"/>
+                                                    <f:facet name="sourceCaption" class="picklistFacet">Llaves</f:facet>
+                                                    <f:facet name="targetCaption" class="picklistFacet">Llaves asignadas</f:facet>
+                                                </p:pickList>                                   
+                                            </div>
+
+                                        </div>
+                                    </b:tab>
+
+                                    <!--<b:tab title="Perfiles de Proceso" id="tabprofileprocess">
+                                        <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <div class="panel-body col-md-10">
+                                             
+                                                <p:pickList id="pickListPerfilProcess" value="#{groupsController.profileProcess}" var="elem" 
+                                                            itemLabel="#{elem.profileName}" itemValue="#{elem}" styleClass="picklist size" converter="entityConverter">
+                                                    <p:ajax event="transfer" listener="#{groupsController.onTransferProfileProcess}" update="message"/>
+                                                    <f:facet name="sourceCaption" class="picklistFacet">Perfiles</f:facet>
+                                                    <f:facet name="targetCaption" class="picklistFacet">Perfiles asignados</f:facet>
+                                                </p:pickList>                                   
+                                            </div>
+
+                                        </div>
+                                    </b:tab>-->
+                                    <b:tab title="Permisos" id="tabTask">
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="panel-body col-md-11">
+                                                <p:pickList addAllLabel="Agregar todo" addLabel="Agregar" removeAllLabel="Quitar todo" removeLabel="Quitar"  id="pickListTask" 
+                                                            value="#{groupsController.task}" var="elem" responsive="true"
+                                                            itemLabel="#{elem.taskName}" itemValue="#{elem}" styleClass="picklist size" converter="entityConverter">
+                                                    <p:ajax event="transfer" listener="#{groupsController.onTransferProfileTask}" update="message pickListTask"/>
+                                                    <f:facet name="sourceCaption" class="picklistFacet">Tareas</f:facet>
+                                                    <f:facet name="targetCaption" class="picklistFacet">Tareas asignadas</f:facet>
+                                                </p:pickList>                                   
+                                            </div>
+
+                                        </div>
+                                    </b:tab>
+                                </b:tabView>
+
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+
+            </h:form>
+            <script>
+                jQuery.fn.dataTable.models.oSettings['aoInitComplete'].push({
+                    "fn": jQuery.fn.dataTableExt.oApi.clearSearch,
+                    "sName": 'whatever'
+                });
+            </script>
+        </h:body>
+    </ui:define> 
+</ui:composition>

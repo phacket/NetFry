@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  template = "../templates/template-adminprocess.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                 xmlns:h="http://xmlns.jcp.org/jsf/html"
+                 xmlns:f="http://xmlns.jcp.org/jsf/core"
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <div class="col-md-12">
+                <a href="menuadminprocess.jsf"><button type="button" class="btn btn-return2" >Regresar</button></a>
+            </div>
+            <div class="tbl-row">
+                <div class="col-md-1"></div>
+                <div class="col-md-12">
+                    <div class="panel">
+                  
+                        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+
+                            <p:graphicImage  value="../resources/img/ajax_loading_bar.gif" />
+
+                        </p:dialog>
+                        <h:form>
+                            <p:growl id="message" showDetail="false" />
+                            <div class="panel-heading">
+                                <p class="panel-title text-center tittle-panel">PERFILES DE PROCESO
+                                    <h:commandButton value="Agregar perfil" id="add-profile" styleClass="pull-right descargar" action="#{profileProcessController.goToCreate()}"></h:commandButton>
+                                </p>
+                            </div>
+                            <div class="panel-body">
+                                <b:dataTable  value="#{profileProcessController.items}" var="item" responsive="true" lang="es" fixedHeader="true" scroll-size="200px">
+                                    <b:dataTableColumn order="asc" label="Id perfil">#{item.profileProcessId}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Nombre de perfil">#{item.profileName}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Fecha de registro">
+                                        <h:outputText value="#{item.referenceDate}"> 
+                                            <f:convertDateTime type="date" dateStyle="long" pattern="yyyy/MM/dd HH:mm:ss" timeZone="America/Mexico_City" /> 
+                                        </h:outputText>
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn label="Tipo de firma previa">#{item.SignaturePrevtoString()}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Tipo de conversión">#{item.ConvertionType2Str()}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Tipo de firma a aplicar">#{item.SignatureType2String()}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Periodo de retención mes(es)">#{item.storageTimeStr()}</b:dataTableColumn>
+                                    <h:column orderable="false">
+                                        <f:facet name="header">
+                                            <h:outputText value="Copiar"></h:outputText>
+                                        </f:facet>
+                                        <b:commandButton action="#{profileProcessController.goToCopy(item)}"  value="" style="padding: 0; border: none; background: none;color: #000" styleClass="center-block center glyphicon glyphicon-copy">
+                                        </b:commandButton>
+                                    </h:column>
+                                    <h:column orderable="false">
+                                        <f:facet name="header">
+                                            <h:outputText value="Editar"></h:outputText>
+                                        </f:facet>
+                                        <b:commandButton action="#{profileProcessController.goToEdit(item)}"  value="" style="padding: 0; border: none; background: none;color: #000" styleClass="center-block center glyphicon glyphicon-edit">
+                                        </b:commandButton>
+                                    </h:column>
+                                    <h:column orderable="false">
+                                        <f:facet name="header">
+                                            <h:outputText value="Eliminar"></h:outputText>
+                                        </f:facet>
+                                        <p:commandButton value="" action="#{profileProcessController.remove(item)}" style="padding: 0; border: none; background: none;color: #000" styleClass="center-block glyphicon glyphicon-trash" update="@form">
+                                            <p:confirm header='¿Eliminar?' message="#{genericprop.DeleteConfirmation}" icon="ui-icon-alert" />
+                                        </p:commandButton>
+                                    </h:column>
+                                </b:dataTable>
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes size" icon="ui-icon-check" />
+                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no size" icon="ui-icon-close" />
+                                </p:confirmDialog>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </div>  
+            <script>
+                $(document).ready(function () {
+                    var table = $('table').dataTable();
+
+                    // Perform a filter
+                    table.fnFilter('');
+
+                });
+            </script>
+        </h:body>
+    </ui:define> 
+</ui:composition>

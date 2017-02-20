@@ -1,0 +1,332 @@
+<ui:composition  template = "../templates/template-adminprocess.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+
+
+        <h:body>
+            <style>
+                .required:before { content:"* ";color: red;  font-size: 6pt; }
+            </style>
+            <div class="col-md-12">
+                <a href="menuusers.jsf"><button type="button" class="btn btn-return" >Regresar</button></a>
+            </div>
+            <div class="tbl-row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <p class="panel-title text-center tittle-panel">AGREGAR USUARIO ADMINISTRADOR</p>
+                        </div>
+                        <div class="panel-body">
+                            <h:form id="form">
+                                <p:growl id="message" showDetail="false" widgetVar="growlWV" globalOnly="true"/>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="panel">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-5">
+
+                                                        <h:outputText value="Nombre:" styleClass="required"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="nombre"/>
+                                                        <b:inputText id="nombre" value="#{usersController.selected.firstName}" required="true" requiredMessage="El nombre es mandatorio" onblur="ActivarRequerimiento()" >
+                                                            <f:ajax event="keyup" execute="@this" render="commonName"/>
+                                                        </b:inputText>    
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Apellido paterno:" styleClass="required"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="apaterno"/>
+                                                        <b:inputText id="apaterno" value="#{usersController.selected.middleName}" required="true" requiredMessage="El apellido paterno es mandatorio" onblur="ActivarRequerimiento()">
+                                                            <f:ajax event="keyup" execute="@this" render="commonName"/>
+                                                        </b:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Apellido materno:" styleClass="required"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="amaterno"/>
+                                                        <b:inputText id="amaterno" value="#{usersController.selected.lastName}" required="true" requiredMessage="El apellido materno es mandatorio" onblur="ActivarRequerimiento()">
+                                                            <f:ajax event="keyup" execute="@this" render="commonName"/>
+                                                        </b:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Nombre de usuario:" styleClass="required"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="commonName"/>
+                                                        <b:inputText id="commonName" disabled="true" value="#{usersController.getFullName()}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Teléfono:" styleClass="required"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="telNumber"/>
+                                                        <b:inputText value="#{usersController.selected.telNumber}" required="true" requiredMessage="El teléfono es mandatorio" id="telNumber" onkeyup="validarTelefono()"  onblur="ActivarRequerimiento('telefono')">
+                                                            <f:validator validatorId="telnumbervalidator"/>
+                                                        </b:inputText>
+                                                        <p id="telmsg"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Calle:" styleClass="required"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="calle"/>
+                                                        <b:inputText id="calle" value="#{usersController.selected.calle}" required="true" requiredMessage="La calle es mandatorio" onblur="ActivarRequerimiento()" />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Número exterior:" styleClass="required" /> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="numeroExt"/>
+                                                        <b:inputText value="#{usersController.selected.numero}" required="true" requiredMessage="El número es mandatorio" id="numeroExt" onblur="ActivarRequerimiento()"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Código postal:" styleClass="required" /> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="cpostal"/>
+                                                        <b:inputText id="cpostal" value="#{usersController.selected.codigoPostal}" required="true" requiredMessage="El código postal es mandatorio" onblur="ActivarRequerimiento()">
+                                                            <f:validator validatorId="zipcodevalidator"/>
+                                                        </b:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Municipio:" styleClass="required"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="municipio"/>
+                                                        <b:inputText id="municipio" value="#{usersController.selected.municipio}" required="true" requiredMessage="El municipio es mandatorio" onblur="ActivarRequerimiento()"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Colonia:" styleClass="required"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="colonia"/>
+                                                        <b:inputText id="colonia" value="#{usersController.selected.colonia}" required="true" requiredMessage="La colonia es mandatoria" onblur="ActivarRequerimiento()"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Estado:" styleClass="required"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="estado"/>
+                                                        <b:inputText id="estado" value="#{usersController.selected.estado}" required="true" requiredMessage="El estado es mandatorio" onblur="ActivarRequerimiento()"/>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="panel">
+                                            <div class="panel-body">
+
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Área:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="area"/>
+                                                        <h:selectOneMenu value="#{usersController.selected.areaId}" id="area" converter="javax.faces.Integer" class="form-control">
+
+                                                            <f:selectItems value="#{areaController.items}" var="a" itemLabel="#{a.areaName}" itemValue="#{a.areaId.toString()}" />
+
+                                                        </h:selectOneMenu>
+                                                    </div>
+                                                </div>
+                                                 <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="RFC:" styleClass="required"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="rfc"/>
+                                                        <b:inputText id="rfc" value="#{usersController.selected.rfc}" required="true" requiredMessage="El RFC es mandatorio" onkeyup="validRfc()" onblur="ActivarRequerimiento('rfc')">
+                                                            <f:validator validatorId="validaterfc"/>
+                                                        </b:inputText>
+                                                        <p id="rfcmsg"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="CURP:" styleClass="required"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="curp"/>
+                                                        <b:inputText id="curp" value="#{usersController.selected.curp}" required="true" requiredMessage="El CURP campo es mandatorio" onkeyup="validCurp()" onblur="ActivarRequerimiento('curp')">
+                                                            <f:validator validatorId="validatecurp"/>
+                                                        </b:inputText>
+                                                        <p id="curp"></p>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="País:" /> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="country"/>
+                                                        <b:selectOneMenu id="country" value="#{usersController.selected.countryCode}" >
+                                                            <f:selectItems    value="#{usersController.availableLocale}" var="item" itemLabel="#{item.nombrePais}" itemValue="#{item.codigoPais}" />
+                                                        </b:selectOneMenu>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Correo electrónico:" styleClass="required"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="email"/>
+                                                        <b:inputText id="email" value="#{usersController.selected.email}" required="true" requiredMessage="El correo electrónico es mandatorio" onkeyup="validEmail()" onblur="ActivarRequerimiento('email')">
+                                                            <f:validator validatorId="validateEmail"/>
+                                                        </b:inputText>
+                                                        <p id="emailmsg"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Tamaño de la llave:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="keySize"/>
+                                                        <b:selectOneMenu id="keySize" value="#{usersController.selected.keySizeBits}" binding="#{keysize}">
+                                                            <f:selectItem itemLabel="1024" itemValue="1024"/>
+                                                            <f:selectItem itemLabel="2048" itemValue="2048"/>
+                                                            <f:selectItem itemLabel="3072" itemValue="3072"/>
+                                                        </b:selectOneMenu>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Fecha de vencimiento:" styleClass="required"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+
+                                                        <div class="ui-fluid">
+
+                                                            <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank">
+                                                                <b:message for="cdate1"/>
+                                                                <p:calendar  id="cdate1"  mindate="#{now}" readonlyInput="true" required="true" placeholder="Fecha de vencimiento" pattern="dd/MMMMM/yyyy"  navigator="true"  value="#{usersController.selected.certVencimiento}" requiredMessage="La fecha de vencimiento es mandatoria" onblur="ActivarRequerimiento()" locale="es"/>
+                                                            </p:panelGrid>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Clave de anulación:" styleClass="required"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="password2"/>
+                                                        <b:inputSecret value="#{usersController.selected.challengePrase}" id="password2" required="true" requiredMessage="La clave de anulación es mandatoria" binding="#{passtext2}" styleClass="pwd" onblur="ActivarRequerimiento('confirmanula')">
+                                                            <f:validator validatorId="passwordValidation" />
+                                                            <f:attribute name="confirm" value="#{confirmPassword2.submittedValue}" />
+                                                        </b:inputSecret>
+                                                        <b:message id="m_password2" for="password2" />
+                                                        <p id="confirmanumsg"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Confirmar Clave" styleClass="required"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="confirm2"/>
+                                                        <b:inputSecret value="#{usersController.passwordValidate}" id="confirm2" binding="#{confirmPassword2}" required="true" requiredMessage="La validación de la clave es mandatoria" styleClass="pwd" onblur="ActivarRequerimiento('confirmanula')">
+                                                        </b:inputSecret>
+                                                        <b:message id="m_confirm2" for="confirm2" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Contraseña:" styleClass="required"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="password"/>
+                                                        <b:inputSecret value="#{usersController.selected.password}" id="password" required="true" requiredMessage="La contraseña es mandatoria" binding="#{passtext}" styleClass="pwd" autocomplete="false" onblur="ActivarRequerimiento('confirm')">
+                                                            <f:validator validatorId="passwordValidation" />
+                                                            <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
+                                                        </b:inputSecret>
+                                                        <b:message id="m_password" for="password" />
+                                                        <p id="confirmmsg"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Confirmar contraseña:" styleClass="required"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:message for="confirm"/>
+                                                        <b:inputSecret value="#{usersController.passwordValidate}" id="confirm" required="true" requiredMessage="La validación de la contraseña es mandatoria" binding="#{passtextConfirm}" styleClass="pwd" autocomplete="false" onblur="ActivarRequerimiento('confirm')">
+                                                        </b:inputSecret>
+                                                        <b:message id="m_confirm" for="confirm" />
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-md-12">
+                                    <div class="col-md-3">
+                                        <b:button    value="Generar Certificado" class="btn btn-return pull-right cancel" id="req" binding="#{req}" disabled="#{usersController.btnReq}"/>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <b:commandButton value="Generar PKCS12" action="#{usersController.donwloadcert()}" id="btnReq"  class="btn btn-return pull-right cancel"/>
+                                    </div>
+
+                                    <h:inputText  id="privatekey"  value="#{usersController.privateKey}" binding="#{privatekey}" style="visibility: hidden"/>
+                                    <h:inputText  id="publickey"  value="#{usersController.publicKey}" binding="#{publickey}" style="visibility: hidden"/>
+                                    <h:inputText value="#{usersController.certUser}" id="certificate" binding="#{certificate}" style="visibility: hidden"/>
+                                    <h:inputText value="#{usersController.cerAut}" id="certificateAc" binding="#{certificateAc}" style="visibility: hidden"/>
+                                    <h:inputText value="#{usersController.pfx}" id="pfx" binding="#{pfx}" style="visibility: hidden"/>
+                                    <h:inputText  id="urlrequest"  value="#{usersController.urlrequest}" binding="#{urlrequest}" style="visibility: hidden"/>
+                                    <h:inputText  id="urluserinsert"  value="#{usersController.urluserinsert}" binding="#{urluserinsert}"  style="visibility: hidden"/>
+                                    <h:inputText  id="usersessionid"  value="#{usersController.sessionId}" binding="#{usersessionid}"  style="visibility: hidden"/>
+                                </div>
+
+                            </h:form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <script src="lib/SgData_SgLibJSv1.3.js"/>
+            <script src="../resources/js/shortcut.js" type="text/javascript"></script>
+            <script src="../resources/js/UserTools.js" type="text/javascript"></script>
+            <script src="../resources/js/AdminCertificate.js" type="text/javascript"></script>
+
+        </h:body>
+    </ui:define> 
+</ui:composition>

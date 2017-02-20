@@ -1,0 +1,87 @@
+<ui:composition  template = "../templates/template-policies.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <div class="col-md-12">
+                <a href="adminalgorithms.jsf"><button type="button" class="btn btn-return2">Regresar</button></a>
+            </div>
+            <div class="tbl-row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <h:form>
+                        <p:growl id="message" showDetail="false" />
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <p class="panel-title text-center tittle-panel">EDITAR POLÍTICA DE ALGORITMOS DE FIRMA</p>
+                            </div>
+                            <div class="panel-body">
+
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-5">
+                                        <h:outputText value="Nombre del algoritmo:"/>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <b:inputText value="#{algorithmSignSymmController.selected.algorithmName}" disabled="true"/>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-5">
+                                        <h:outputText value="OID:"/>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <b:inputText value="#{algorithmSignSymmController.selected.oid}" disabled="true"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-5">
+                                        <h:outputText value="OID algoritmo hash:"/>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <b:inputText value="#{algorithmSignSymmController.selected.hashBin}" disabled="true"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-5">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <h:column orderable="false">                                
+                                            <p:selectBooleanCheckbox value="#{algorithmSignSymmController.selected.isActive}"/>
+                                            <h:outputText value="Activo"/>
+                                        </h:column>
+                                    </div>
+                                </div>
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                </p:confirmDialog>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h:button class="btn btn-default return pull-right" outcome="adminalgorithms" value="Cancelar"></h:button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h:commandButton action="#{algorithmSignSymmController.edit(algorithmSignSymmController.selected)}" class="btn btn-default return pull-left" id="end-area" value="Agregar"/>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </h:form>
+                </div>  
+            </div>
+
+        </h:body>
+    </ui:define> 
+</ui:composition>

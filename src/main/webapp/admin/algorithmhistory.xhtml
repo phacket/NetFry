@@ -1,0 +1,61 @@
+<ui:composition  template = "../templates/template-policies.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <div class="col-md-12">
+                <a href="menupolicies.jsf"><button type="button" class="btn btn-return2" >Regresar</button></a>
+            </div>
+            <div class="tbl-row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <p class="panel-title text-center tittle-panel">HISTORIAL DE ALGORITMOS</p>
+                        </div>
+                        <div class="panel-body">
+                            <h:form>
+                                <p:growl id="message" showDetail="true" />
+                                #{algorithmHistoryController.selected.details}
+                                <br/>
+                                <b:dataTable value="#{algorithmHistoryController.items}" var="item" responsive="true" lang="es" fixedHeader="true" scroll-size="400px">
+                                    <b:dataTableColumn label="Fecha y hora (UTC)">
+                                        <h:outputText value="#{item.referenceDate}"> 
+                                            <f:convertDateTime type="date" dateStyle="long" pattern="yyyy/MM/dd HH:mm:ss" timeZone="America/Mexico_City" /> 
+                                        </h:outputText> 
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn label="Id">#{item.eventId}</b:dataTableColumn>
+                                    <b:dataTableColumn label="IP">#{item.hostName}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Movimiento">#{item.action}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Detalles">
+                                        <ul>
+                                            <ui:repeat var="i" value="#{item.detailsSplit}">
+                                                <li>#{i}</li>
+                                            </ui:repeat>
+                                        </ul>
+                                    </b:dataTableColumn>
+                                </b:dataTable>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+
+            <script>
+                $(document).ready(function () {
+                    var table = $('table').dataTable();
+
+                    // Perform a filter
+                    table.fnFilter('');
+
+                });
+            </script>
+        </h:body>
+
+    </ui:define> 
+</ui:composition>

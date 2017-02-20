@@ -1,0 +1,104 @@
+<ui:composition  template = "../templates/template-adminprocess.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"
+                 xmlns:b="http://bootsfaces.net/ui"> 
+    <ui:define  name = "content" >
+        <h:body>
+            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+
+                <p:graphicImage  value="../resources/img/ajax_loading_bar.gif" />
+
+            </p:dialog>
+            <b:container>
+                <b:row>
+                    <div class="tbl-row">
+                        <b:column span="2"></b:column>
+                        <b:column span="4">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h:form>
+                                        <p:commandLink action="#{hSMKeyController.goToHsm()}">
+                                            <div class="m-seg">
+                                                <img src="../resources/img/iconos/ico-hsm.png" class="m-icon-hsm"/>
+                                                <br/><br/><strong>Administración de Llaves HSM</strong>
+                                            </div>
+                                        </p:commandLink>
+                                    </h:form>
+
+                                </div>
+                            </div>
+                        </b:column>
+                        <b:column span="4">
+                            <div class="text-center">
+                                <h:form>
+                                    <p:commandLink action="#{areaController.goToArea()}">
+                                        <div class="m-seg" id="s-are">
+                                            <img src="../resources/img/iconos/ico-areas.png" class="m-icon-area"/>
+                                            <br /><strong>Áreas</strong>
+                                        </div> 
+                                    </p:commandLink>
+                                </h:form>
+
+                            </div>
+                        </b:column>
+                        <b:column span="2"></b:column>
+                    </div>
+                </b:row>
+                <b:row>
+                    <div class="m-row">
+                        <b:column span="4">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h:form>
+                                        <p:commandLink action="#{groupsController.goToGroups()}">
+                                            <div class="m-seg">
+                                                <img src="../resources/img/iconos/ico-groups.png" class="m-icon-groups"/>
+                                                <br/><strong>Grupos</strong>
+                                            </div>
+                                        </p:commandLink>
+                                    </h:form>
+
+                                </div>
+                            </div>
+                        </b:column>
+                        <b:column span="4">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h:form>
+                                        <p:commandLink action="#{profileProcessController.goToProfileProcess()}">
+                                            <div class="m-seg">
+                                                <img src="../resources/img/iconos/ico-profile.png" class="m-icon-profile"/>
+                                                <br/><strong>Perfiles de Proceso</strong>
+                                            </div>
+                                        </p:commandLink>
+                                    </h:form>
+
+                                </div>
+                            </div>
+                        </b:column>
+                        <b:column span="4">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h:form>
+                                        <p:commandLink action="#{usersController.goToUsers()}">
+                                            <div class="m-seg">
+                                                <img src="../resources/img/iconos/ico-user.png" class="m-icon-user" style="width: 20%"/>
+                                                <br/><strong>Usuarios</strong>
+                                            </div>
+                                        </p:commandLink>
+                                    </h:form>
+
+                                </div>
+                            </div>
+                        </b:column>
+                        <br/>
+                    </div>
+                </b:row>
+            </b:container>
+        </h:body>
+    </ui:define>
+</ui:composition>

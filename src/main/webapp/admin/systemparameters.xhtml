@@ -1,0 +1,470 @@
+<ui:composition  template = "../templates/template-config.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <h:form>
+                <div class="tbl-row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <p class="panel-title text-center tittle-panel" >CONFIGURACIÓN DEL SISTEMA</p>
+                            </div>
+                            <div class="panel-body">
+                                <b:tabView activeIndex="0">
+                                    <b:tab title="Documentos">
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Extensiones permitidas:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputTextarea rows="3" value="#{systemParametersController.items.FILEEXTENSIONS.parameterValue}"/>  
+                                            </div>
+                                            <div class="col-md-1"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Tamaño máximo(bytes):"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText value="#{systemParametersController.items.FILESIZEMAX.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Tiempo de almacenamiento"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText p:placeholder="30" value="#{systemParametersController.items.STORAGETIME.parameterValue}">
+                                                    <f:facet name="append">
+                                                        <h:outputText value="días" />
+                                                    </f:facet>
+                                                </b:inputText>
+                                            </div>
+
+                                        </div>
+
+                                    </b:tab>
+                                    <b:tab title="Servicio de correo electrónico">
+                                        <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-3">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:slider handle-shape="round" min="1" max="100"
+                                                          label-style="" style="font-style: normal"
+                                                          value="#{systemParametersController.items.EMAILSTORAGEDAYS.parameterValue}"
+                                                          step="1"  label="Días para mantener correo:"
+
+                                                          />
+                                            </div>
+                                            <div class="col-md-1">
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Servidor SMTP:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText value="#{systemParametersController.items.SMTPSERVER.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Puerto SMTP:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText value="#{systemParametersController.items.SMTPPORT.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Usuario anónimo:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <p:selectBooleanCheckbox value="#{systemParametersController.items.anonymous}">
+
+                                                </p:selectBooleanCheckbox>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Usuario SMTP:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText value="#{systemParametersController.items.SMTPUSER.parameterValue}">
+                                                    <f:validator validatorId="validateEmail"/>
+                                                </b:inputText>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Contraseña SMTP:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputSecret styleClass="pwd"  value="#{systemParametersController.items.SMTPPASSWORD.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="SSL SMTP:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <p:selectBooleanCheckbox value="#{systemParametersController.items.ssl}" >
+
+                                                </p:selectBooleanCheckbox>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="From email:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText value="#{systemParametersController.items.FROMEMAIL.parameterValue}"></b:inputText>
+                                            </div>
+                                        </div>
+                                    </b:tab>
+                                    <b:tab title="Web Services">
+
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value=" URL Servicios de archivado:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText value="#{systemParametersController.items.ARCHIVEURL.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Usuario:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText value="#{systemParametersController.items.ARCHIVEUSERNAME.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Contraseña:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputSecret styleClass="pwd"  value="#{systemParametersController.items.ARCHIVEPASSWORD.parameterValue}" />
+                                            </div>
+                                        </div>
+                                        <legend></legend>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="URL Módulo criptográfico:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText  value="#{systemParametersController.items.CRYPTOURL.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Usuario:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText p:placeholder="admin"  value="#{systemParametersController.items.CRYPTOUSERNAME.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Contraseña:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputSecret styleClass="pwd"  value="#{systemParametersController.items.CRYPTOPASSWORD.parameterValue}" />
+                                            </div>
+                                        </div>
+                                        <legend></legend>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="URL Llaves HSM:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText value="#{systemParametersController.items.HSMKEYURL.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Usuario:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText value="#{systemParametersController.items.HSMKEYUSERNAME.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Contraseña:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputSecret styleClass="pwd"  value="#{systemParametersController.items.HSMKEYPASSWORD.parameterValue}" />
+                                            </div>
+                                        </div>
+                                        <legend></legend>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="URL SeguriSign:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText value="#{systemParametersController.items.SEGURISIGNURLs.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Usuario:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText value="#{systemParametersController.items.SEGURISIGNUSERNAME.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Contraseña:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputSecret styleClass="pwd"  value="#{systemParametersController.items.SEGURISIGNPASSWORD.parameterValue}" />
+                                            </div>
+                                        </div>
+                                        <legend></legend>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="URL SeguriServer:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText value="#{systemParametersController.items.SEGURISERVERURL.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Usuario:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText value="#{systemParametersController.items.SEGURISERVERUSERNAME.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Contraseña:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputSecret styleClass="pwd"  value="#{systemParametersController.items.SEGURISERVERPASSWORD.parameterValue}" />
+                                            </div>
+                                        </div>
+
+                                    </b:tab>
+                                    <b:tab title="Sistema">
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="URL Portal de usuario:"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText value="#{systemParametersController.items.URLUSERCERT.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Llave del agente:"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:selectOneMenu value="#{systemParametersController.items.KEYAGENT.parameterValue}" id="brandID" >
+                                                    <f:selectItems value="#{systemParametersController.HSMKeys}" var="element" itemLabel="#{element.keyTag}" itemValue="#{element.HSMKeyIdString}" />
+                                                </b:selectOneMenu>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Algoritmo de firma:"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:selectOneMenu value="#{systemParametersController.items.SIGNEDALGORITHM.parameterValue}" id="brandID2" >
+                                                    <f:selectItems value="#{systemParametersController.algorithms}" var="item" itemLabel="#{item.algorithmName}" itemValue="#{item.algorithmSignIdString}" />
+                                                </b:selectOneMenu>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Organización:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText value="#{systemParametersController.items.ORGANIZATION.parameterValue}"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-3">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:slider handle-shape="round" min="1" max="100"
+                                                          label-style="" style="font-style: normal"
+                                                          value="#{systemParametersController.items.EVENTDAYS.parameterValue}"
+                                                          step="1"  label="Dias de resguardo de logs:"
+
+                                                          />
+                                            </div>
+                                            <div class="col-md-1">
+                                            </div>
+
+                                        </div>
+
+                                    </b:tab>
+                                    <b:tab title="Servicios de firma">
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="URL Servicio web DOPKCS1:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText value="#{systemParametersController.items.DOPKCS1URL.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Usuario:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText value="#{systemParametersController.items.DOPKCS1USERNAME.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Contraseña:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputSecret styleClass="pwd" value="#{systemParametersController.items.DOPKCS1PASSWORD.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                        <legend></legend>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="URL Servicio web DOPKCS7::"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText value="#{systemParametersController.items.DOPKCS7URL.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Usuario:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputText value="#{systemParametersController.items.DOPKCS7USERNAME.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Contraseña:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputSecret styleClass="pwd"  value="#{systemParametersController.items.DOPKCS7PASSWORD.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                    </b:tab>
+
+                                    <b:tab title="Descarga">
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Licencia de Aspose:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputSecret styleClass="pwd" value="#{systemParametersController.items.ASPOSELIC.parameterValue}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-3">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:slider handle-shape="round" min="1" max="100"
+                                                          label-style="" style="font-style: normal"
+                                                          value="#{systemParametersController.items.FILESIZEZIP.parameterValue}"
+                                                          step="1"  label="Tamaño máximo del archivo zip(bytes):"
+                                                          />
+                                            </div>
+                                            <div class="col-md-1">
+                                            </div>
+                                        </div>                       
+                                        <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-3">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:slider handle-shape="round" min="1" max="100"
+                                                          label-style="" style="font-style: normal"
+                                                          value="#{systemParametersController.items.FILESIZEZIPDAYS.parameterValue}"
+                                                          step="1"  label="Días disponibles del archivo zip:"
+                                                          />
+                                            </div>
+                                            <div class="col-md-1">
+                                            </div>
+                                        </div>  
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <h:outputText value="Email template:"/> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:inputTextarea rows="3" value="#{systemParametersController.items.EMAILTEMPLATE.parameterValue}"/>  
+                                            </div>
+                                        </div>
+                                    </b:tab>
+                                </b:tabView>
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        <h:commandButton class="btn return pull-right" value="Guardar" action="#{systemParametersController.edit()}" />
+                                    </div>
+                                </div>
+                                <p:growl id="message" showDetail="false" />
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </h:form>
+
+        </h:body>
+    </ui:define> 
+</ui:composition>

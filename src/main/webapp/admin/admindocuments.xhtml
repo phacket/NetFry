@@ -1,0 +1,124 @@
+<ui:composition  template = "../templates/template-admindocuments.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+
+                <p:graphicImage  value="../resources/img/ajax_loading_bar.gif" />
+
+            </p:dialog>
+            <div class="tbl-row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <p class="panel-title text-center tittle-panel">ADMINISTRAR DOCUMENTOS</p>
+                        </div>
+
+                        <div class="panel-body">
+                            <h:form>
+                                <p:growl id="message" showDetail="false" />
+                                <b:row>
+                                    <div class="col-md-1"></div>
+                                    <b:column span="2">
+
+                                        <div class="ui-fluid">
+                                            <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank">
+                                                <p:calendar showWeek="false" value="#{documentController.startDate}"  style="form-control" locale="es" pattern="dd/MMMMM/yyyy"  navigator="true" 
+                                                            readonlyInput="true" placeholder="Fecha inicial" required="true" requiredMessage="Es necesario llenar el campo de fecha inicial">
+                                                    <p:ajax event="dateSelect" update="@this v2" listener="#{documentController.cleanDate()}"/>
+                                                </p:calendar>
+                                            </p:panelGrid>
+                                        </div>
+
+                                    </b:column>
+                                    <b:column span="2">
+
+                                        <div class="ui-fluid">
+                                            <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank">
+                                                <p:calendar showWeek="false" id="v2" value="#{documentController.endDate}" locale="es"  pattern="dd/MMMMM/yyyy"  navigator="true"  
+                                                            mindate="#{documentController.startDate}" readonlyInput="true" placeholder="Fecha final"
+                                                            required="true" requiredMessage="Es necesario llenar el campo de fecha final">
+
+                                                </p:calendar>
+                                            </p:panelGrid>
+                                        </div>
+
+
+                                    </b:column>
+<!--                                    ETIQUETA DE BUSCADOR
+                                    <b:column span="3">
+                                        <h:outputText value="Nombre del documento:" class="pull-right">
+                                        </h:outputText>
+                                    </b:column>-->
+                                    <b:column span="4">
+                                        <b:inputText class="pull-left" value="#{documentController.search}" placeholder="Nombre del documento">
+                                        </b:inputText>
+                                    </b:column>
+                                    <b:column span="1">
+                                        <b:commandButton ajax="true" update="formTable @form message"  value="Buscar" action="#{documentController.getItemsSearch}" styleClass="pull-right"/>
+                                    </b:column>
+
+                                    <b:column span="1">
+                                        <b:commandButton   value="Limpiar" styleClass="pull-right" action="#{documentController.resetFrom()}" immediate="true"/>
+                                    </b:column>
+                                </b:row><br />
+                            </h:form>
+                            <h:form id="formTable">
+                                <b:dataTable value="#{documentController.items}" var="item" responsive="true" lang="es" fixedHeader="true" 
+                                             scroll-size="200px" id="table">
+                                    <b:dataTableColumn order="asc" label="ID documento">#{item.documentId}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Nombre de documento">#{item.documentName}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Nombre de usuario">#{item.fullName}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Tipo de firma">#{item.tipoFirma}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Fecha de registro">
+                                        <h:outputText value="#{item.dateCreated}"> 
+                                            <f:convertDateTime type="date" dateStyle="long" pattern="yyyy/MM/dd HH:mm:ss" timeZone="America/Mexico_City" />
+                                        </h:outputText>                       
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn label="Fecha de vencimiento">
+                                        <h:outputText value="#{item.expirationDate}"> 
+                                            <f:convertDateTime type="date" dateStyle="long" pattern="yyyy/MM/dd HH:mm:ss" timeZone="America/Mexico_City" />
+
+                                        </h:outputText>
+                                    </b:dataTableColumn>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Editar"></h:outputText>
+                                        </f:facet>
+                                        <b:commandButton   value="" style="padding: 0; border: none; background: none;color: #000" 
+                                                           styleClass="center-block center glyphicon glyphicon-edit" 
+                                                           action="#{documentController.goToEdit(item)}" />
+                                    </h:column>
+                                </b:dataTable>
+
+                            </h:form>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+            <script>
+                $(document).ready(function () {
+                    var table = $('table').dataTable();
+
+                    // Perform a filter
+                    table.fnFilter('');
+
+                });
+            </script>
+        </h:body>
+
+    </ui:define> 
+</ui:composition>
+
+
+
+
+

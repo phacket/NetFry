@@ -1,0 +1,56 @@
+<ui:composition  template = "template.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <div class="tbl-row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="panel fondo">
+                        <div class="panel-heading">
+                            <p class="panel-title text-center tittle-panel">INICIO DE SESIÓN</p>
+                        </div>
+                        <div class="panel-body">
+                            <h:form>
+                                <div class="col-md-12">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-3">
+                                        <h:outputText value="Usuario:"/> 
+                                    </div>
+                                    <div class="col-md-8">
+                                        <b:inputText value="#{loginController.username}" required="true" required-message="El nombre del usuario es mandatorio"/>   
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-3">                                   
+                                        <h:outputText value="Contraseña:"/> 
+                                    </div>
+                                    <div class="col-md-8">
+                                        <b:inputSecret styleClass="pwd" value="#{loginController.password}"/> 
+                                    </div>     
+                                    <div class="col-md-12">
+                                        <div class="col-md-6"/>
+                                        <div class="col-md-6">
+                                            <h:commandButton  class="btn btn-default center-block return" action="#{loginController.login}" value="Iniciar Sesión"/>
+                                        </div>
+                                    </div>   
+                                </div>
+                                <p:growl id="message" showDetail="false" />
+                            </h:form>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </h:body>
+    </ui:define> 
+</ui:composition>
+
+
+
+
+
+

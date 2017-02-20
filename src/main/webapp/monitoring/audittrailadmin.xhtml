@@ -1,0 +1,97 @@
+<ui:composition  template = "../templates/template-monitoring.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <div class="col-md-12">
+                <a href="menumonitoring.jsf"><button type="button" class="btn btn-return-reports" >Regresar</button></a>
+            </div>
+            <div class="tbl-row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <p class="panel-title text-center tittle-panel">LOG DE AUDITORÍA DEL ADMINISTRADOR</p>
+                        </div>
+                        <div class="panel-body">
+                            <h:form>
+                                <h:body>
+                                    <b:row>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-3">
+                                            <div class="ui-fluid">
+                                                <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank">
+                                                    <p:calendar value="#{auditTrailReportControllerAdmin.startDate}" locale="es"  pattern="dd/MMMMM/yyyy"  navigator="true" 
+                                                                id="f1" readonlyInput="true" placeholder="Fecha inicial" required="true" requiredMessage="Es necesario llenar el campo de fecha inicial">
+                                                        <p:ajax event="dateSelect" rendered="v3"  update="@this v3" listener="#{auditTrailReportControllerAdmin.cleanDate()}" />
+                                                    </p:calendar>
+                                                </p:panelGrid>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="ui-fluid">
+                                                <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank">
+                                                    <p:calendar id="v3" value="#{auditTrailReportControllerAdmin.endDate}" locale="es" pattern="dd/MMMMM/yyyy"  navigator="true"  
+                                                                mindate="#{auditTrailReportControllerAdmin.startDate}" readonlyInput="true" placeholder="Fecha final"
+                                                                required="true" requiredMessage="Es necesario llenar el campo de fecha final">
+
+                                                    </p:calendar>
+                                                </p:panelGrid>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <h:commandButton value="Buscar"  action="#{auditTrailReportControllerAdmin.getItemsSearch}" styleClass="pull-left"></h:commandButton>
+                                        </div>
+                                        <!--<div class="col-md-1">-->
+                                            <b:column span="1">
+                                            <b:commandButton   value="Limpiar" styleClass="pull-right" action="#{auditTrailReportControllerUser.fillControls()}"/>
+                                            </b:column>
+                                        <!--</div>-->
+                                        <b:column span="4">
+                                        </b:column>
+                                        <h:column>
+
+                                        </h:column>
+                                    </b:row><br />
+                                    #{auditTrailReportControllerAdmin.selected.eventDate}
+                                    <b:dataTable value="#{auditTrailReportControllerAdmin.items}" var="item" responsive="true" lang="es" fixedHeader="true" scroll-size="400px">
+                                        <b:dataTableColumn label="Fecha y hora (UTC)">
+                                            <h:outputText value="#{item.eventDate}"> 
+                                                <f:convertDateTime type="date" dateStyle="long" pattern="yyyy/MM/dd HH:mm:ss" timeZone="America/Mexico_City" /> 
+                                            </h:outputText>	
+                                        </b:dataTableColumn>
+                                        <b:dataTableColumn label="Id">#{item.recordId}</b:dataTableColumn>
+                                        <b:dataTableColumn label="Nombre de usuario">#{item.fullNameUser}</b:dataTableColumn>
+                                        <b:dataTableColumn label="I P">#{item.userHostIP}</b:dataTableColumn>
+                                        <b:dataTableColumn label="Sección">#{item.categoryCode}</b:dataTableColumn>
+                                        <b:dataTableColumn label="Movimiento">#{item.eventCode}</b:dataTableColumn>
+                                        <b:dataTableColumn label="Detalles">#{item.notes}</b:dataTableColumn>
+                                    </b:dataTable>
+                                    <p:growl id="message" showDetail="false" />
+                                </h:body>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+            <script>
+                $(document).ready(function () {
+                    var table = $('table').dataTable();
+
+                    // Perform a filter
+                    table.fnFilter('');
+
+                });
+//                $("#form\\:f1_input").on("blur", function () {
+//
+//                    $("#form\\:v3_input").val("");
+//                });
+            </script>
+        </h:body>
+    </ui:define> 
+</ui:composition>

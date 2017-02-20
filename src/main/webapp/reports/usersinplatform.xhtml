@@ -1,0 +1,78 @@
+<ui:composition  template = "../templates/template-reports.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <div class="col-md-12">
+                <a href="menureports.jsf"><button type="button" class="btn btn-return-reports" >Regresar</button></a>
+            </div>
+            <div class="tbl-row">
+                <div class="col-md-12">
+
+                    <div class="panel">
+                        <h:form>
+                            <div class="panel-heading">
+                                <p class="panel-title text-center tittle-panel">REPORTE DE USUARIOS 
+                                    <h:commandButton value="Descargar Reporte" action="#{userReportController.adminReportAspose()}"  styleClass="pull-right descargar"></h:commandButton>
+                                </p>
+                            </div>
+                        </h:form>
+                        <h:form>
+                            <div class="panel-body">
+                                <b:row>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2">
+                                        <h:outputText class="pull-right" value="Nombre de usuario:"></h:outputText>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <b:inputText value="#{userReportController.searchadmin}" placeholder="Nombre de usuario" class="pull-left">
+                                        </b:inputText>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <h:commandButton value="Buscar"  styleClass="pull-left" action="#{userReportController.getItemsSearch()}"></h:commandButton>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <h:commandButton value="Limpiar"  styleClass="pull-left" action="#{userReportController.cleanPage()}"></h:commandButton>
+                                    </div>
+                                </b:row><br />
+
+                                <b:dataTable value="#{userReportController.items}" var="item" responsive="true" lang="es" fixedHeader="true" scroll-size="400px">
+                                    <b:dataTableColumn order="asc" label="Id Usuario">#{item.userId}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Nombre de usuario">#{item.fullName}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Área">#{item.areaName}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Correo electrónico">#{item.email}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Tipo de autenticación">#{item.tipoInicio}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Número de serie de certificado">#{item.serie}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Fecha de vencimiento de certificado">
+                                        <h:outputText value="#{item.vencimiento}"> 
+                                            <f:convertDateTime type="date" dateStyle="long" pattern="yyyy/MM/dd HH:mm:ss" timeZone="America/Mexico_City" />
+                                        </h:outputText>
+                                    </b:dataTableColumn>
+
+                                </b:dataTable>
+
+                                <p:growl id="message" showDetail="false" />
+                            </div>
+                        </h:form>
+                    </div>
+
+                </div>  
+            </div>
+            <script>
+                $(document).ready(function () {
+                    var table = $('table').dataTable();
+
+                    // Perform a filter
+                    table.fnFilter('');
+
+                });
+            </script>
+        </h:body>
+
+    </ui:define> 
+</ui:composition>

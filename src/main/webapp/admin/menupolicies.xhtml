@@ -1,0 +1,98 @@
+<ui:composition  template = "../templates/template-policies.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"
+                 xmlns:b="http://bootsfaces.net/ui"> 
+    <ui:define  name = "content" >
+        <h:body>
+            <b:container>
+                <b:row>
+                    <div class="tbl-row">
+                        <b:column span="2"></b:column>
+                        <b:column span="4">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h:form>
+                                        <p:commandLink action="#{algorithmAsymmetricController.goToAssy()}">
+                                            <div class="m-pol">
+                                                <img src="../resources/img/iconos/ico-asymetric.png" class="m-icon-alg"/>
+                                                <br/><strong>Algoritmos Asimétricos</strong>
+                                            </div>
+                                        </p:commandLink>
+                                    </h:form>
+
+                                </div>
+                            </div>
+                        </b:column>
+                        <b:column span="4">
+                            <div class="text-center">
+                                <h:form>
+                                    <p:commandLink action="#{algorithmSignSymmController.goToSign()}">
+                                        <div class="m-pol">
+                                            <img src="../resources/img/iconos/ico-signature.png" class="m-icon-alg"/>
+                                            <br/><strong>Algoritmos de Firma</strong>
+                                        </div>
+                                    </p:commandLink>
+                                </h:form>
+
+                            </div>
+                        </b:column>
+                        <b:column span="2"></b:column>
+                    </div>
+                </b:row>
+                <b:row>
+                    <div class="m-row">
+                        <b:column span="4">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h:form>
+                                        <p:commandLink action="#{algorithmHashController.goToHash()}">
+                                            <div class="m-pol">
+                                                <img src="../resources/img/iconos/ico-hash.png" class="m-icon-hashalg"/>
+                                                <br/><strong>Algoritmos Hash</strong>
+                                            </div>
+                                        </p:commandLink>
+                                    </h:form>
+
+                                </div>
+                            </div>
+                        </b:column>
+                        <b:column span="4">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h:form>
+                                        <p:commandLink action="#{libraryUpload.goToUploadLibrary()}">
+                                            <div class="m-pol">
+                                                <img src="../resources/img/iconos/ico-library.png" class="m-icon"/>
+                                                <br/><strong>Cargar Librerías de Algoritmos</strong>
+                                            </div>
+                                        </p:commandLink>
+                                    </h:form>
+
+                                </div>
+                            </div>
+                        </b:column>
+                        <b:column span="4">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h:form>
+                                        <p:commandLink action="#{algorithmHistoryController.goToHistoryAlgs()}">
+                                            <div class="m-pol" id="p-his">
+                                                <img src="../resources/img/iconos/ico-historyalgorithm.png" class="m-icon-hisalg"/>
+                                                <br/><strong>Historial de Algoritmos</strong>
+                                            </div>
+                                        </p:commandLink>
+                                    </h:form>
+
+                                </div>
+                            </div>
+                        </b:column>
+                        <br/>
+                    </div>
+                </b:row>
+            </b:container>
+        </h:body>
+    </ui:define>
+</ui:composition>

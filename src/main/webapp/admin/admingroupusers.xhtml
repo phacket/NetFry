@@ -1,0 +1,56 @@
+<ui:composition  template = "../templates/template-adminprocess.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <div class="tbl-row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <p class="panel-title text-center tittle-panel">AGREGAR USUARIO</p>
+                            <span class="pull-right clickable" data-effect="fadeOut"><i class="fa fa-times"></i></span>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-default return pull-right" id="cancel-user">CANCELAR</button>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-default return pull-left" id="end-user">FINALIZAR</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="tbl-row"></div>
+            <br />
+            <div class="tbl-row"></div>
+            <br />
+            <div class="tbl-row"></div>
+            <br />
+            <div class="tbl-row"></div>
+            <br />
+            <div class="tbl-row"></div>
+            <br />
+            <div class="tbl-row"></div>
+            <script>
+                $(document).ready(function () {
+                    var table = $('table').dataTable();
+
+                    // Perform a filter
+                    table.fnFilter('');
+
+                });
+            </script>
+        </h:body>
+    </ui:define> 
+</ui:composition>

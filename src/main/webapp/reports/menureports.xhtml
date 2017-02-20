@@ -1,0 +1,97 @@
+<ui:composition  template = "../templates/template-reports.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"
+                 xmlns:b="http://bootsfaces.net/ui"> 
+    <ui:define  name = "content" >
+        <h:body>
+            <b:container>
+                <b:row>
+                    <div class="tbl-row">
+                        <b:column span="2"></b:column>
+
+                        <b:column span="4">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h:form>
+                                        <p:commandLink action="#{adminReportController.fillControls()}">
+                                            <div class="m-rep">
+                                                <img src="../resources/img/iconos/ico-adminreport.png" class="m-icon-report" />
+                                                <br/><strong class="reports">Reporte  de Administradores</strong>
+                                            </div>
+                                        </p:commandLink>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </b:column>
+                        <b:column span="4">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h:form>
+                                        <p:commandLink action="#{certReportController.fillControls()}">
+                                            <div class="m-rep" id="r-cer">
+                                                <img src="../resources/img/iconos/ico-certreport.png" class="m-icon-report" />
+                                                <br/><strong class="reports">Certificados por Vencer</strong>
+                                            </div>
+                                        </p:commandLink>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </b:column>
+                        <b:column span="2"></b:column>
+                    </div>
+                </b:row>
+                <b:row>
+                    <div class="m-row">
+
+                        <b:column span="4">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h:form>
+                                        <p:commandLink action="#{documentReportController.fillControls()}">
+                                            <div class="m-rep" >
+                                                <img src="../resources/img/iconos/ico-docreport.png" class="m-icon-docreport" />
+                                                <br/><strong class="reports">Reporte de Documentos</strong>
+                                            </div>
+                                        </p:commandLink>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </b:column>
+                        <b:column span="4">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h:form>
+                                        <p:commandLink action="#{documentReportController.fillControlsExpire()}">
+                                            <div class="m-rep">
+                                                <img src="../resources/img/iconos/ico-docexpirereport.png" class="m-icon-report" />
+                                                <br/><strong class="reports">Documentos por Vencer</strong>
+                                            </div>
+                                        </p:commandLink>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </b:column>
+                        <b:column span="4">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h:form>
+                                        <p:commandLink action="#{userReportController.fillControls()}">
+                                            <div class="m-rep">
+                                                <img src="../resources/img/iconos/ico-userreport.png" class="m-icon-report" />
+                                                <br/><strong class="reports">Reporte de Usuarios</strong>
+                                            </div>
+                                        </p:commandLink>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </b:column>
+                        <br/>
+                    </div>
+                </b:row>
+            </b:container>
+        </h:body>
+    </ui:define>
+</ui:composition>

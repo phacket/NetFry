@@ -1,0 +1,146 @@
+<ui:composition  template = "../templates/template-adminprocess.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <div class="col-md-12">
+                <a href="adminusers.jsf"><button type="button" class="btn btn-return" >Regresar</button></a>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <p class="panel-title text-center tittle-panel">AGREGAR USUARIO</p>
+                        </div>
+                        <div class="panel-body">
+                            <h:form>
+                                <p:growl id="message" showDetail="false" />
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="panel">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Tipo usuario:" /> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:selectOneMenu value="Seleccionar" id="userType" >
+                                                            <f:selectItem itemLabel="Usuario" itemValue="usuario"/>
+                                                            <f:selectItem itemLabel="Administrador" itemValue="administrador"/>
+                                                        </b:selectOneMenu>  
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Nombre:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:inputText/>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Apellido paterno:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:inputText/>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Apellido materno:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:inputText />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Teléfono:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:inputText />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Calle:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:inputText />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="panel">
+                                            <div class="panel-body">
+
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Número:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:inputText />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Código postal:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:inputText />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Municipio:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:inputText />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Colonia:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:inputText />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <h:outputText value="Estado:"/> 
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <b:inputText />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h:button outcome="adminusers" class="btn btn-default return pull-right" id="cancel-user" value="Cancelar"></h:button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h:button  outcome="adminuseraccess" class="btn btn-default return pull-left" id="next-user1"  value="Siguiente"></h:button>
+                                    </div>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:body>
+    </ui:define> 
+</ui:composition>

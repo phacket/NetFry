@@ -1,0 +1,152 @@
+<ui:composition  template = "../templates/template-adminprocess.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <div class="col-md-12">
+                <a href="adminprofileprocesses.jsf"><button type="button" class="btn btn-return2" >Regresar</button></a>
+            </div>
+            <div class="tbl-row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <p class="panel-title text-center tittle-panel">CREAR PERFIL DE PROCESO</p>
+                        </div>
+                        <div class="panel-body">
+                            <h:form id="form">
+                                <p:growl id="message" showDetail="false" />
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-4">
+                                        <h:outputText value="Nombre del perfil:"/> 
+                                    </div>
+                                    <div class="col-md-7">
+                                        <b:inputText value="#{profileProcessController.selected.profileName}" required="true" requiredMessage="El nombre del perfil es mandatorio"/>   
+                                    </div>
+                                </div>
+                                <h:panelGroup id="panelSelect">
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-4">
+                                            <h:outputText value="Tipo de firma previa:"/> 
+                                        </div>
+                                        <div class="col-md-7">
+                                            <h:selectOneMenu value="#{profileProcessController.selected.previousSignatureType}" styleClass="form-control inputstl" disabled="#{profileProcessController.disableprevious}">
+                                                <f:selectItem itemLabel="Ninguna" itemValue="0"/>
+                                                <f:selectItem itemLabel="PDF" itemValue="1" />
+                                                <f:selectItem itemLabel="CMS" itemValue="2"/>
+                                                <f:selectItem itemLabel="XMLSignature" itemValue="3"/>
+                                                <p:ajax event="change" listener="#{profileProcessController.Change()}" update="panelSelect"/>
+
+                                            </h:selectOneMenu>  
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-4">
+                                            <h:outputText value="Tipo de conversión:"/> 
+                                        </div>
+                                        <div class="col-md-7">
+                                            <h:selectOneMenu  value="#{profileProcessController.selected.conversionType}"  styleClass="form-control inputstl" disabled="#{profileProcessController.disableconvertion}">
+                                                <f:selectItem itemLabel="Sin conversión" itemValue="0"/>
+                                                <f:selectItem itemLabel="Office a PDF/A" itemValue="1" />
+                                                <f:selectItem itemLabel="PDF/A" itemValue="2" />
+                                                <p:ajax event="change" listener="#{profileProcessController.Change2()}" update="panelSelect"/>
+
+
+                                            </h:selectOneMenu>  
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-4">
+                                            <h:outputText value="Tipo de firma a aplicar:"/> 
+                                        </div>
+                                        <div class="col-md-7">
+                                            <h:selectOneMenu value="#{profileProcessController.selected.signatureType}" disabled="#{profileProcessController.disableSignatureType}" styleClass="form-control inputstl">
+                                                <f:selectItem itemLabel="Ninguna" itemValue="0"/>
+                                                <f:selectItem itemLabel="PDF" itemValue="1" />
+                                                <f:selectItem itemLabel="CMS" itemValue="2"/>
+                                                <f:selectItem itemLabel="XMLSignature" itemValue="3"/>
+
+                                            </h:selectOneMenu>  
+                                        </div>
+                                    </div>
+
+                                </h:panelGroup>
+
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-4">
+                                        <h:outputText value="Grupo:"/> 
+                                    </div>
+                                    <div class="col-md-7">
+                                        <b:selectOneMenu value="#{profileProcessController.selected.groupId}" required="true" requiredMessage="El grupo es mandatorio">
+                                            <f:selectItems value="#{profileProcessController.profileGroups}" var="item" itemLabel="#{item.groupName}" itemValue="#{item.groupId}" />
+                                        </b:selectOneMenu> 
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-4">
+                                        <h:outputText value="Periodo de retención mes(es):"/>
+                                    </div>
+                                    
+                                    <div class="col-md-7">
+                                        <b:slider handle-shape="round" min="1" max="100"
+                                                  label-style="" style=""
+                                                  value="#{profileProcessController.selected.storageTime}"
+                                                  step="1" 
+                                                  />
+                                    </div>
+                                    <div class="col-md-1">
+                                    </div>
+                                </div>  
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h:button outcome="adminprofileprocesses" class="btn btn-default return pull-right" id="cancel-profile" value="Cancelar"></h:button>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <h:commandButton  class="btn btn-default return pull-left" id="next-profile" value="Agregar" action="#{profileProcessController.insert(profileProcessController.selected)}"></h:commandButton>
+                                    </div> 
+                                </div>
+                            </h:form>
+
+                        </div>
+                    </div>
+                </div>  
+            </div>
+            <script>
+                function validPositiveNum() {
+
+                    var num = document.getElementById("input_form:storageTime").value;
+
+
+                    var pattern = /^[0-9]+$/;
+
+                    if (pattern.test(num) || num >= 0) {
+
+                        $("#msg").html("");
+//                        $("#msg").css('color', 'green');
+
+                    } else
+                    {
+                        $("#msg").html("El numero debe solo de ser positivo");
+                        $("#msg").css('color', 'red');
+                        document.getElementById("input_form:storageTime").value = "";
+                    }
+
+
+                }
+            </script>
+        </h:body>
+    </ui:define> 
+</ui:composition>

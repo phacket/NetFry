@@ -1,0 +1,117 @@
+<ui:composition  template = "../templates/template-reports.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <div class="col-md-12">
+                <a href="menureports.jsf"><button type="button" class="btn btn-return-reports" >Regresar</button></a>
+            </div>
+            <div class="tbl-row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+
+                    <div class="panel">
+                        <h:form>
+                            <div class="panel-heading">
+                                <p class="panel-title text-center tittle-panel  col-md-12">REPORTE DE DOCUMENTOS
+                                    <h:commandButton value="Descargar Reporte" action="#{documentReportController.docReport()}" styleClass="pull-right descargar"></h:commandButton>
+                                </p>
+                            </div>
+                        </h:form>
+                        <div class="col-md-1">
+                        </div>
+                        <div class="panel-body">
+                            <h:form >
+                                <p class="col-md-12">
+                                    <h:commandButton value="Limpiar"  styleClass="pull-right" action="#{documentReportController.fillControls()}"></h:commandButton>
+                                </p>
+                            </h:form>                            
+                            <h:form>
+                                <b:row>
+                                    <div class="col-md-2">
+                                        <div class="ui-fluid">
+                                            <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank">
+                                                <p:calendar value="#{documentReportController.startDate}"  style="form-control" locale="es" pattern="dd/MMMMM/yyyy"  navigator="true" 
+                                                            readonlyInput="true" placeholder="Fecha inicial" required="true" requiredMessage="Es necesario llenar el campo de fecha inicial">
+                                                    <p:ajax event="dateSelect" update="v2 @this" listener="#{documentReportController.cleanDate()}"/>
+                                                </p:calendar>
+                                            </p:panelGrid>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="ui-fluid">
+                                            <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank">
+                                                <p:calendar id="v2" value="#{documentReportController.endDate}" locale="es" pattern="dd/MMMMM/yyyy"  navigator="true"
+                                                            mindate="#{documentReportController.startDate}" readonlyInput="true" placeholder="Fecha final"
+                                                            required="true" requiredMessage="Es necesario llenar el campo de fecha final">
+
+                                                </p:calendar>
+                                            </p:panelGrid>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b:selectOneMenu value="#{documentReportController.signedType}" styleClass="size" id="brandID">
+                                            <f:selectItem itemLabel="--Seleccionar--" itemValue="100"/>
+                                            <f:selectItem itemLabel="Ninguna" itemValue="0" class="size"/>
+                                            <f:selectItem itemLabel="PDF" itemValue="1" class="size"/>
+                                            <f:selectItem itemLabel="CMS" itemValue="2" class="size"/>
+                                            <f:selectItem itemLabel="XMLSignature" itemValue="3" class="size"/>
+                                        </b:selectOneMenu>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <h:outputText value="Documento:"></h:outputText>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b:inputText value="#{documentReportController.search}" placeholder="Nombre de documento">
+                                        </b:inputText>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <h:commandButton value="Buscar"  styleClass="pull-right" action="#{documentReportController.getItemsSearch()}"></h:commandButton>
+                                    </div>
+
+                                </b:row><br />
+                                <b:dataTable value="#{documentReportController.items}" var="item" responsive="true" lang="es" fixedHeader="true" scroll-size="400px">
+                                    <b:dataTableColumn order="asc" label="Id documento">#{item.documentId}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Nombre de usuario">#{item.fullName}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Nombre de documento">#{item.documentName}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Tipo de firma">#{item.tipoFirma}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Fecha de registro">
+                                        <h:outputText value="#{item.dateCreated}"> 
+                                            <f:convertDateTime type="date" dateStyle="long" pattern="yyyy/MM/dd HH:mm:ss" timeZone="America/Mexico_City" />
+                                        </h:outputText>
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn label="Fecha de vencimiento">
+                                        <h:outputText value="#{item.expirationDate}"> 
+                                            <f:convertDateTime type="date" dateStyle="long" pattern="yyyy/MM/dd HH:mm:ss" timeZone="America/Mexico_City" />
+                                        </h:outputText> 
+                                    </b:dataTableColumn>
+                                </b:dataTable>
+                                <p:growl id="message" showDetail="false" />
+
+                            </h:form>
+                        </div>
+
+                    </div>
+                </div>  
+            </div>
+            <script>
+                $(document).ready(function () {
+                    var table = $('table').dataTable();
+
+                    // Perform a filter
+                    table.fnFilter('');
+
+                });
+            </script>
+        </h:body>
+    </ui:define> 
+</ui:composition>
+
+<!--<b:dataTableColumn label="Perfil de proceso"></b:dataTableColumn>
+-->

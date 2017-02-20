@@ -1,0 +1,73 @@
+<ui:composition  template = "../templates/template-adminprocess.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"
+                 xmlns:b="http://bootsfaces.net/ui"> 
+    <ui:define  name = "content" >
+        <h:body>
+            <div class="col-md-12">
+                <a href="adminusers.jsf"><button type="button" class="btn btn-return" >Regresar</button></a>
+            </div>
+            <b:container>
+                <b:row>
+                    <div class="tbl-row">
+                        <b:column span="4"></b:column>
+                        <b:column span="4">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h:form>
+                                        <p:commandLink action="#{usersController.fillControlsCertAdmin()}">
+                                            <div class="m-seg" id="s-usead">
+                                                <img src="../resources/img/iconos/ico-user.png" class="m-icon-user" style="width: 20%"/>
+                                                <br/><strong>Usuario Administrador</strong>
+                                            </div>
+                                        </p:commandLink>
+                                    </h:form>
+
+                                </div>
+                            </div>
+                        </b:column>
+                        <b:column span="2"></b:column>
+                    </div>
+                </b:row>
+                <b:row>
+                    <div class="m-row">
+                        <b:column span="2"></b:column>                    
+                        <b:column span="4">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h:form>
+                                        <p:commandLink action="#{usersController.fillControlsCert()}">                                     <div class="m-seg" id="s-usecert">
+                                                <img src="../resources/img/iconos/ico-user.png" class="m-icon-user" style="width: 20%"/>
+                                                <br/><strong>Usuario con Certificado</strong>
+                                            </div>
+                                        </p:commandLink>
+                                    </h:form>
+
+                                </div>
+                            </div>
+                        </b:column>
+                        <b:column span="4">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h:form>
+                                        <p:commandLink action="#{usersController.fillControls()}">
+                                            <div class="m-seg">
+                                                <img src="../resources/img/iconos/ico-user.png" class="m-icon-user" style="width: 20%"/>
+                                                <br/><strong>Usuario con Contraseña</strong>
+                                            </div>
+                                        </p:commandLink>
+                                    </h:form>
+
+                                </div>
+                            </div>
+                        </b:column>
+                        <br/>
+                    </div>
+                </b:row>
+            </b:container>
+        </h:body>
+    </ui:define>
+</ui:composition>

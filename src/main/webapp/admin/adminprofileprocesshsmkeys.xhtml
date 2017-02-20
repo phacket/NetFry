@@ -1,0 +1,64 @@
+<ui:composition  template = "../templates/template-adminprocess.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <div class="col-md-12">
+                <a href="adminprofileprocess.xhtml"><button type="button" class="btn btn-return" >Regresar</button></a>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <p class="panel-title text-center tittle-panel">AGREGAR LLAVES AL PERFIL DE PROCESO</p>
+                        </div>
+                        <div class="panel-body">
+                            <h:form>
+                                <p:growl id="message" showDetail="false" />
+                                <div class="row">
+                                    <b:column span="3" />
+                                    <b:column span="6">
+                                        <h:panelGrid columns="1">
+
+                                            <p:pickList addAllLabel="Agregar todo" addLabel="Agregar" removeAllLabel="Quitar todo" removeLabel="Quitar" id="pickList" 
+                                                        moveUpLabel="Arriba" moveDownLabel="Abajo" moveTopLabel="Primero" moveBottomLabel="Último"
+                                                        value="#{profileProcessController.HSMKeys}" var="elem"   
+                                                        itemLabel="#{elem}" itemValue="#{elem}" styleClass="picklist">
+                                                <f:facet name="sourceCaption" class="picklistFacet">Llaves del sistema</f:facet>
+                                                <f:facet name="targetCaption" class="picklistFacet">Llaves del perfil</f:facet>
+                                            </p:pickList>                                   
+
+                                        </h:panelGrid>
+                                    </b:column>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h:commandButton  type="button" class="btn btn-default return pull-right" id="cancel-profile" value="Cancelar"></h:commandButton>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h:commandButton  type="button" class="btn btn-default return pull-left" id="next-profile" value="Siguiente"></h:commandButton>
+                                    </div>
+                                </div>
+                            </h:form> 
+                        </div>
+                    </div>
+                </div>  
+            </div>
+            <script>
+                $(document).ready(function () {
+                    var table = $('table').dataTable();
+
+                    // Perform a filter
+                    table.fnFilter('');
+
+                });
+            </script>
+        </h:body>
+    </ui:define> 
+</ui:composition>

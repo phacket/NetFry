@@ -1,0 +1,86 @@
+
+<ui:composition  template = "../templates/template-adminprocess.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <div class="col-md-12">
+                <a href="menuadminprocess.jsf"><button type="button" class="btn btn-return" >Regresar</button></a>
+            </div>
+
+            <div class="tbl-row">
+
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <p class="panel-title text-center tittle-panel">USUARIOS
+
+                                <h:commandButton value="Agregar usuario" id="add-user" styleClass="pull-right descargar"  />
+
+                            </p>
+                        </div>
+                        <div class="panel-body">
+                            <h:form>
+
+                                <b:dataTable  value="#{usersController.items}" var="item" responsive="true" lang="es" fixedHeader="true" scroll-size="200px">
+                                    <b:dataTableColumn order="asc" label="ID usuario">#{item.userId}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Nombre completo">#{item.FullName()}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Área">#{item.areaName}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Correo electrónico">#{item.email}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Tipo de autenticación">#{item.authModeStr()}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Fecha de registro">
+                                        <h:outputText value="#{item.referenceDate}"> 
+                                            <f:convertDateTime type="date" dateStyle="long" pattern="yyyy/MM/dd HH:mm:ss" timeZone="America/Mexico_City" />
+                                        </h:outputText>
+                                    </b:dataTableColumn>
+                                    <h:column  orderable="false" >
+                                        <f:facet name="header">
+                                            <h:outputText value="Editar"></h:outputText>
+                                        </f:facet>
+                                        <b:commandButton rendered="#{item.authenticationMode eq 1}"  action="#{usersController.goToEdit(item)}"  value="" style="padding: 0; border: none; background: none;color: #000" styleClass="center-block center glyphicon glyphicon-edit">
+                                        </b:commandButton>
+                                    </h:column>
+                                    <h:column  orderable="false" >
+                                        <f:facet name="header">
+                                            <h:outputText value="Descargar Certificado                                  "></h:outputText>
+                                        </f:facet>
+                                        <b:commandButton rendered="#{item.authenticationMode eq 2}" action="#{usersController.donwloadCert(item)}"  value="" style="padding: 0; border: none; background: none;color: #000" styleClass="center-block center glyphicon glyphicon-download-alt">
+                                        </b:commandButton>
+                                    </h:column>
+
+                                    <h:column orderable="false">
+                                        <f:facet name="header">
+                                            <h:outputText value="Eliminar"></h:outputText>
+                                        </f:facet>
+                                        <p:commandButton  value="" style="padding: 0; border: none; background: none;color: #000" styleClass="center-block center glyphicon glyphicon-trash" actionListener="#{usersController.remove(item)}" update="@form">
+                                            <p:confirm header='¿Eliminar?' message="#{genericprop.DeleteConfirmation}" icon="ui-icon-alert" />
+                                        </p:commandButton>
+                                    </h:column>
+                                </b:dataTable>
+                                <p:growl id="message" showDetail="false" />
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes size" icon="ui-icon-check" />
+                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no size" icon="ui-icon-close" />
+                                </p:confirmDialog>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </h:body>
+        <script>
+            $(document).ready(function () {
+                var table = $('table').dataTable();
+
+                // Perform a filter
+                table.fnFilter('');
+
+            });
+        </script>
+    </ui:define> 
+</ui:composition>

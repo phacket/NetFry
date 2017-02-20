@@ -1,0 +1,82 @@
+<ui:composition  template = "../templates/template-reports.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <div class="col-md-12">
+                <a href="menureports.jsf"><button type="button" class="btn btn-return-reports" >Regresar</button></a>
+            </div>
+            <div class="tbl-row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+
+                    <div class="panel">
+                        <h:form>
+                            <div class="panel-heading">
+                                <p class="panel-title text-center tittle-panel col-md-12">REPORTE CERTIFICADOS POR VENCER
+                                    <h:commandButton value="Descargar Reporte" action="#{certReportController.certExpired()}" styleClass="pull-right descargar"></h:commandButton>
+                                </p>
+                            </div>
+                        </h:form>
+
+                        <div class="panel-body">
+                            <h:form class="col-md-11">
+                                <p>
+                                    <h:commandButton value="Limpiar"  styleClass="pull-right" action="#{certReportController.fillControls()}"></h:commandButton>
+                                </p> 
+                            </h:form>
+                            <h:form> 
+                                <br/>
+                                <b:row>
+                                    <b:column span="4" />
+                                    <b:column span="3">
+                                        <b:inputText value="#{certReportController.weeks}" type="number"   required="true" requiredMessage="Es necesario llenar el campo de semanas" onkeyup="ValidaSemanas();" onmouseup="ValidaSemanas();" >
+                                            <f:validator validatorId="numericvalidator"/> 
+                                            <f:facet name="append">
+                                                <h:outputText value="Semanas" />
+                                            </f:facet>
+
+                                        </b:inputText>
+                                    </b:column>
+                                    <b:column span="1">
+                                        <h:commandButton value="Buscar"  styleClass="pull-left" action="#{certReportController.search()}"></h:commandButton>
+                                    </b:column>
+
+                                    <b:column span="3"/>
+                                </b:row><br />
+                                <b:dataTable value="#{certReportController.items}" var="item" responsive="true" lang="es" fixedHeader="true" scroll-size="400px">
+                                    <b:dataTableColumn order="asc" label="Id Usuario">#{item.userId}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Nombre de usuario">#{item.fullName}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Correo electrónico">#{item.email}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Número de serie de certificado">#{item.certificateSerie}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Fecha de vencimiento de certificado">
+                                        <h:outputText value="#{item.expirationDate}"> 
+                                            <f:convertDateTime type="date" dateStyle="long" pattern="yyyy/MM/dd HH:mm:ss" timeZone="America/Mexico_City" />
+                                        </h:outputText>
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn label="Tipo de usuario">#{item.userTypeStr}</b:dataTableColumn>
+                                </b:dataTable>
+                                <p:growl id="message" showDetail="false" />
+
+                        </div>
+                    </div> 
+                    </h:form>
+                </div>  
+            </div>
+            <script>
+                $(document).ready(function () {
+                    var table = $('table').dataTable();
+
+                    // Perform a filter
+                    table.fnFilter('');
+
+                });
+            </script>
+        </h:body>
+    </ui:define> 
+</ui:composition>

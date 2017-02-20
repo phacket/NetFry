@@ -1,0 +1,71 @@
+<ui:composition  template = "../templates/template-adminprocess.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <h:form id="form">
+                <p:growl id="message" showDetail="false" />
+                <div class="col-md-12">
+                    <a href="admingroups.jsf"><button type="button" class="btn btn-return">Regresar</button></a>
+                </div>
+                <div class="tbl-row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <p class="panel-title text-center tittle-panel">AGREGAR GRUPO</p>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row col-md-12">
+                                    <div class="col-md-1"/>
+                                    <div class="col-md-4">
+                                        <h:outputText value="Nombre del grupo:"/> 
+                                    </div>
+                                    <div class="col-md-7">
+                                        <b:inputText value="#{groupsController.selected.groupName}" required="true" required-message="El nombre del grupo es mandatorio"/>   
+                                    </div>
+                                </div>
+                                <div class="row col-md-12">
+                                    <div class="col-md-1"/>
+                                    <div class="col-md-4">
+                                        <h:outputText value="Descripción:"/> 
+                                    </div>
+                                    <div class="col-md-7">
+                                        <b:inputTextarea rows="2" value="#{groupsController.selected.description}" required="true" required-message="La descripción del grupo es mandatoria" maxlength="499"></b:inputTextarea>
+                                    </div>
+                                </div>
+                                <div class="row col-md-12">
+                                    <div class="col-md-1"/>
+                                    <div class="col-md-4">
+                                        <h:outputText value="Tipo grupo:"/> 
+                                    </div>
+                                    <div class="col-md-7">
+                                        <b:selectOneMenu value="#{groupsController.selected.profileType}">
+                                            <f:selectItem itemLabel="Usuarios" itemValue="2" />
+                                            <f:selectItem itemLabel="Administradores" itemValue="1"/>
+                                        </b:selectOneMenu>        
+
+                                    </div>
+                                </div>
+                                <div class="row col-md-12">
+                                    <div class="col-md-6">
+                                        <h:button outcome="admingroups" class="btn btn-default return pull-right" value="Cancelar"></h:button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <b:commandButton action="#{groupsController.insert(groupsController.selected)}" class="btn btn-default return pull-left" value="Agregar" update="message"></b:commandButton>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+
+            </h:form>
+        </h:body>
+    </ui:define> 
+</ui:composition>

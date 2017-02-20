@@ -1,0 +1,180 @@
+<ui:composition  template = "../templates/template-adminprocess.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+                <div class="col-md-12">
+                    <a href="adminuser.jsf"><button type="button" class="btn btn-return2" >Regresar</button></a>
+                </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <p class="panel-title text-center tittle-panel">AGREGAR USUARIO</p>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="panel">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h:outputText value="Método de autenticación:"/> 
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <b:selectOneMenu  id="auth-method"  >
+                                                        <f:selectItem itemLabel="Certificado" itemValue="cert" value="cert"/>
+                                                        <f:selectItem itemLabel="Usuario/Password" itemValue="user" value="user"/>
+                                                    </b:selectOneMenu>
+                                                </div>
+                                            </div>
+                                            <div id="for-cert">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <h:outputText value="Organización:" /> 
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <b:inputText readonly="true"/> 
+                                                    </div>
+                                                </div>
+                                          
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h:outputText value="Área:"/> 
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <b:selectOneMenu  id="userType" >
+                                                        <f:selectItem itemLabel="Área 1" itemValue="area1"/>
+                                                        <f:selectItem itemLabel="Área 2" itemValue="area2"/>
+                                                        <f:selectItem itemLabel="Área 3" itemValue="area3"/>
+                                                        <f:selectItem itemLabel="Área 4" itemValue="area4"/>
+                                                    </b:selectOneMenu>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h:outputText value="RFC:"/> 
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <b:inputText/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h:outputText value="CURP:"/> 
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <b:inputText />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h:outputText value="Grupo:"/> 
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <b:selectOneMenu  id="userType" >
+                                                        <f:selectItem itemLabel="Grupo 1" itemValue="grupo1"/>
+                                                        <f:selectItem itemLabel="Grupo 2" itemValue="grupo2"/>
+                                                        <f:selectItem itemLabel="Grupo 3" itemValue="grupo3"/>
+                                                        <f:selectItem itemLabel="Grupo 4" itemValue="grupo4"/>
+                                                    </b:selectOneMenu>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h:outputText value="País:"/> 
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <b:selectOneMenu  id="userType" >
+                                                        <f:selectItem itemLabel="México" itemValue="mex"/>
+                                                        <f:selectItem itemLabel="Brasil" itemValue="brs"/>
+                                                        <f:selectItem itemLabel="Argentina" itemValue="arg"/>
+                                                    </b:selectOneMenu>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="panel">
+                                        <div class="panel-body">
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h:outputText value="Correo electrónico:"/> 
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <b:inputText />
+                                                </div>
+                                            </div>
+                                            <div id="for-cert2">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <h:outputText value="Tamaño de la llave:"/> 
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <b:inputText />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <h:outputText value="Clave de anulación:"/> 
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <b:inputSecret />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <h:outputText value="Confirmar clave:"/> 
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <b:inputSecret />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h:outputText value="Contraseña:"/> 
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <b:inputSecret />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h:outputText value="Confirmar contraseña:"/> 
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <b:inputSecret />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h:button class="btn btn-default return pull-right" id="cancel-user" value="Cancelar"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <h:commandButton class="btn btn-default return pull-left" id="end-user" value="Agregar" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:body>
+    </ui:define> 
+</ui:composition>

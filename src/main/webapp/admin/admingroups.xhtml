@@ -1,0 +1,80 @@
+<ui:composition  template = "../templates/template-adminprocess.xhtml" 
+                 xmlns = "http://www.w3.org/1999/xhtml" 
+                 xmlns:b ="http://bootsfaces.net/ui"
+                 xmlns:f = "http://java.sun.com/jsf/core" 
+                 xmlns:h = "http://java.sun.com/jsf/html" 
+                 xmlns:ui = "http://java.sun.com/jsf/facelets"  
+                 xmlns:p = "http://primefaces.org/ui"> 
+    <ui:define  name = "title">Seguribox</ui:define> 
+    <ui:define  name = "content"> 
+        <h:body>
+            <div class="col-md-12">
+                <a href="menuadminprocess.jsf"><button type="button" class="btn btn-return">Regresar</button></a>
+            </div>
+            <div class="tbl-row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                    <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+
+                        <p:graphicImage  value="../resources/img/ajax_loading_bar.gif" />
+
+                    </p:dialog>
+                    <h:form>
+
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <p class="panel-title text-center tittle-panel">GRUPOS
+                                    <h:commandButton value="Agregar grupo" id="add-group" styleClass="pull-right descargar" action="#{groupsController.goToCreate()}"></h:commandButton>
+                                </p>
+                            </div>
+                            <div class="panel-body">
+
+                                <b:dataTable value="#{groupsController.items}" var="item" responsive="true" lang="es" fixedHeader="true" scroll-size="200px">
+                                    <b:dataTableColumn order="asc" label="Id Grupo">#{item.groupId}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Nombre de grupo">#{item.groupName}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Tipo grupo">#{item.profileTypeStr()}</b:dataTableColumn>
+                                    <b:dataTableColumn label="Fecha de registro">
+                                        <h:outputText value="#{item.referenceDate}"> 
+                                            <f:convertDateTime type="date" dateStyle="long" pattern="yyyy/MM/dd HH:mm:ss" timeZone="America/Mexico_City" />
+                                        </h:outputText>
+                                    </b:dataTableColumn>
+                                    <h:column orderable="false">
+                                        <f:facet name="header">
+                                            <h:outputText value="Editar"></h:outputText>
+                                        </f:facet>
+                                        <p:commandButton action="#{groupsController.goToEdit(item)}" value="" style="padding: 0; border: none; background: none;color: #000;" styleClass="center-block center glyphicon glyphicon-edit">
+                                        </p:commandButton>
+                                    </h:column>
+                                    <h:column orderable="false">
+                                        <f:facet name="header">
+                                            <h:outputText value="Eliminar"></h:outputText>
+                                        </f:facet>
+                                        <p:commandButton action="#{groupsController.remove(item)}" value="" style="padding: 0; border: none; background: none;color: #000; " styleClass="center-block glyphicon glyphicon-trash" update="@form">
+                                            <p:confirm header='¿Eliminar?' message="#{genericprop.DeleteConfirmation}" icon="ui-icon-alert" />
+                                        </p:commandButton>
+                                    </h:column>
+                                </b:dataTable>
+                                <p:growl id="message" showDetail="false" />
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes size" icon="ui-icon-check" />
+                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no size" icon="ui-icon-close" />
+                                </p:confirmDialog>
+
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+            <script>
+                $(document).ready(function () {
+                    var table = $('table').dataTable();
+
+                    // Perform a filter
+                    table.fnFilter('');
+
+                });
+            </script>
+        </h:body>
+    </ui:define> 
+</ui:composition>
