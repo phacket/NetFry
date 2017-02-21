@@ -69,6 +69,7 @@ public class DocumentReportController implements Serializable {
         StartDate = null;
         EndDate = null;
         Search = null;
+        weeks = 1;
     }
 
     /**
@@ -333,7 +334,7 @@ public class DocumentReportController implements Serializable {
         EndDate = null;
         Search = null;
         SignedType = null;
-        weeks = 0;
+     
         FacesContext.getCurrentInstance().getExternalContext().redirect("docsinplatform.jsf");
         return "docsinplatform?faces-redirect=true";
     }
