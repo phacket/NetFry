@@ -33,7 +33,7 @@
                                         <h:outputText value="Semanas: "/>
                                     </b:column>
                                     <b:column span="3">
-                                        <b:inputText id="semanas" value="{certReportController.weeks}" validatorMessage="El rango de semana es incorrecto" type="number"   required="true" requiredMessage="Es necesario llenar el campo de semanas" onblur="ValidaSemanas();" onmouseup="ValidaSemanas();" >
+                                        <b:inputText id="semanas" value="#{certReportController.weeks}" validatorMessage="El rango de semana es incorrecto" type="number"   required="true" requiredMessage="Es necesario llenar el campo de semanas" onblur="ValidaSemanas();" onmouseup="ValidaSemanas();" >
                                             <f:validator validatorId="numericvalidator"/> 
                                             <f:validateLongRange minimum="1" maximum="100" />
                                             <f:facet name="append">
@@ -41,17 +41,13 @@
                                             </f:facet>
 
                                         </b:inputText>
-                                        <!--                                        <b:slider handle-shape="round" min="1" max="100"
-                                                                                          label-style="" style=""
-                                                                                          value="#{certReportController.weeks}"
-                                                                                          step="1" 
-                                                                                          />-->
+                              
                                     </b:column>
                                     <b:column span="1">
                                         <h:commandButton value="Buscar"  styleClass="pull-left" action="#{certReportController.search()}"></h:commandButton>
                                     </b:column>
                                     <b:column span="1">
-                                        <h:commandButton value="Limpiar"  styleClass="pull-left" action="#{certReportController.fillControls()}"></h:commandButton>
+                                        <h:commandButton value="Limpiar"  styleClass="pull-left" action="#{certReportController.fillControls()}" immediate="true"></h:commandButton>
                                     </b:column>
                                     <b:column span="3"/>
                                 </b:row><br />
