@@ -390,11 +390,14 @@ public class DocumentController implements Serializable {
         items = new ArrayList<>();
     }
 
-    public void resetFrom() {
+    public String resetFrom() throws IOException {
 
         items = new ArrayList<>();
         EndDate = null;
         StartDate = null;
         Search = "";
+        
+         FacesContext.getCurrentInstance().getExternalContext().redirect("admindocuments.jsf");
+        return "admindocuments?faces-redirect=true";
     }
 }
