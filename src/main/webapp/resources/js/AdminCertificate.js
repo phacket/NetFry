@@ -69,9 +69,11 @@ var fechaven2 = new Date();
 var numrequests = 0;
 var reqexitoso = false;
 var saveexitoso = false;
+var certGenerado=false;
 
 //Valida si se debe activa el boton de generacion de requerimiento
 function ActivarRequerimiento(control) {
+    
     var activar = true;
     var validControl = true;
     nombre = $("#input_form\\:nombre").val();
@@ -123,6 +125,9 @@ function ActivarRequerimiento(control) {
     if (control == 'confirmanula') {
         validControl = validAnularPassword();
     }
+    if (certGenerado==true) { //No se puede activar el boton nuevamente por el certificado ya fue generado
+        activar = false;
+    }
     if (activar && validControl)
         $("#form\\:req").css("display", "inline"); //Ocultar el boton de requerimiento
     else {
@@ -139,6 +144,9 @@ function ValidateForm() {
     $("#form\\:privatekey").val("");
 
     fechaven2 = DateLong($("#form\\:cdate1_input").val());
+    if (certGenerado==true) {
+        str = str + "* El certificado ya fue generado     *\n";
+    }
 
     if (nombre === "") {
         str = str + "* El nombre es mandatorio            *\n";
@@ -324,6 +332,7 @@ function RequestCertificate() {
         });
         SaveUserCertificate();
         reqexitoso = true;
+        certGenerado=true;
     });
     requestReqResult.fail(function (jqXHR, textStatus) {
         var ajaxresult=jqXHR.responseText;
