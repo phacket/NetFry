@@ -71,6 +71,7 @@ var fechaven2 = new Date();
 var numrequests = 0;
 var reqexitoso = false;
 var saveexitoso = false;
+var certGenerado = false;
 
 //Valida si se debe activa el boton de generacion de requerimiento
 function ActivarRequerimiento(control)
@@ -127,6 +128,9 @@ function ActivarRequerimiento(control)
     if (control == 'confirmanula') {
         validControl = validAnularPassword();
     }
+    if (certGenerado == true) {
+        activar = false;
+    }
     if (activar && validControl)
         $("#form\\:req").css("display", "inline");//Ocultar el boton de requerimiento
     else
@@ -145,6 +149,9 @@ function ValidateForm() {
 
     fechaven2 = DateLong($("#form\\:cdate1_input").val());
 
+    if (certGenerado == true) {
+        str = str + "* El certificado ya fue generado     *\n";
+    }
     if (nombre === "") {
         str = str + "* El nombre es mandatorio            *\n";
     }
@@ -294,10 +301,10 @@ function RequestCertificate()
         sessionid: sessionId
     });
     PF('growlWV').renderMessage({
-            "summary": "Información!",
-            "detail": "Generando certificado",
-            "severity": "info"
-        });
+        "summary": "Información!",
+        "detail": "Generando certificado",
+        "severity": "info"
+    });
     var requestReqResult = $.ajax({
         url: url,
         type: 'POST',
@@ -308,18 +315,18 @@ function RequestCertificate()
         dataType: 'json'
     });
     requestReqResult.done(function (data) {
-       PF('growlWV').renderMessage({
+        PF('growlWV').renderMessage({
             "summary": "Información!",
             "detail": "Certificado generado, correctament",
             "severity": "info"
         });
         certificateac = data.certAut;
         certificateus = data.certUser;
-       PF('growlWV').renderMessage({
+        PF('growlWV').renderMessage({
             "summary": "Información!",
             "detail": "Generando P12",
             "severity": "info"
-        }); 
+        });
         SgData_CodePKCS12(["-----BEGIN CERTIFICATE-----" + certificateus + "-----END CERTIFICATE-----", "-----BEGIN CERTIFICATE-----" + certificateac + "-----END CERTIFICATE-----"], privatekey, password, function (error, result) {
             if (error) {
                 PF('growlWV').renderMessage({
@@ -334,6 +341,7 @@ function RequestCertificate()
         });
         SaveUserCertificate();
         reqexitoso = true;
+        certGenerado = true;
     });
     requestReqResult.fail(function (jqXHR, textStatus) {
         var ajaxresult = jqXHR.responseText;
@@ -399,10 +407,10 @@ function SaveUserCertificate()
         ipaddress: null
     });
     PF('growlWV').renderMessage({
-            "summary": "Información!",
-            "detail": "Guardando usuario",
-            "severity": "info"
-        }); 
+        "summary": "Información!",
+        "detail": "Guardando usuario",
+        "severity": "info"
+    });
     //Metodo que invoca el servicio de creacion de usuario
     var requestSaveResult = $.ajax({
         url: urlinsert,
