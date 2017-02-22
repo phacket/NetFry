@@ -22,8 +22,8 @@
                             <h:form>
                                 <h:body>
                                     <b:row>
-                                        <div class="col-md-1"></div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-2">
                                             <div class="ui-fluid">
                                                 <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank">
                                                     <p:calendar value="#{auditTrailReportControllerAdmin.startDate}" locale="es"  pattern="dd/MMMMM/yyyy"  navigator="true" 
@@ -33,26 +33,27 @@
                                                 </p:panelGrid>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-2">
                                             <div class="ui-fluid">
                                                 <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank">
                                                     <p:calendar id="v3" value="#{auditTrailReportControllerAdmin.endDate}" locale="es" pattern="dd/MMMMM/yyyy"  navigator="true"  
                                                                 mindate="#{auditTrailReportControllerAdmin.startDate}" readonlyInput="true" placeholder="Fecha final"
                                                                 required="true" requiredMessage="Es necesario llenar el campo de fecha final">
-
                                                     </p:calendar>
                                                 </p:panelGrid>
                                             </div>
                                         </div>
                                         <div class="col-md-1">
-                                            <h:commandButton value="Buscar"  action="#{auditTrailReportControllerAdmin.getItemsSearch}" styleClass="pull-left"></h:commandButton>
+                                             <b:column span="1">
+                                            <b:commandButton   value="Buscar"  action="#{auditTrailReportControllerAdmin.getItemsSearch()}" styleClass="pull-left"/>
+                                            </b:column>
                                         </div>
                                         <!--<div class="col-md-1">-->
                                             <b:column span="1">
-                                            <b:commandButton   value="Limpiar" styleClass="pull-right" action="#{auditTrailReportControllerUser.fillControls()}"/>
+                                            <b:commandButton   value="Limpiar" styleClass="pull-right" action="#{auditTrailReportControllerUser.fillControls()}" />
                                             </b:column>
                                         <!--</div>-->
-                                        <b:column span="4">
+                                        <b:column span="3">
                                         </b:column>
                                         <h:column>
 

@@ -27,8 +27,8 @@
                             <div class="panel-body">
 
                                 <b:row>
-                                    <b:column span="1" />
-                                    <b:column span="2">
+                                    <b:column span="2" />
+                                    <b:column span="3" >
                                         <b:inputText id="semanas" value="#{documentReportController.weeks}"  type="number"   required="true" validator-message="Rango de semanas incorrecto" requiredMessage="Es necesario llenar el campo de semanas" onblur="ValidaSemanas();" onmouseup="ValidaSemanas();">
                                             <f:validator  validatorId="numericvalidator"  /> 
                                             <f:validateLongRange minimum="1" maximum="100"  />
@@ -37,24 +37,20 @@
                                             </f:facet>
                                         </b:inputText>
                                     </b:column>
-                                    <b:column span="2">
-                                        <h:outputText value="Nombre del documento:" class="pull-right">
-
-                                        </h:outputText>
-                                    </b:column>
-                                    <b:column span="2">
+                                 
+                                    <b:column span="3">
                                         <b:inputText class="pull-left" placeholder="Nombre del documento" value="#{documentReportController.search}">
                                         </b:inputText>
                                     </b:column>
-                                    <b:column span="2">
-                                        <h:commandButton value="Buscar"  styleClass="pull-left" action="#{documentReportController.getItemsSearchToWeeks}"></h:commandButton>
-                                    </b:column>
-                                    <b:column span="2">
-                                        <h:commandButton value="Limpiar"  styleClass="pull-left" action="#{documentReportController.fillControlsExpire()}" immediate="true"></h:commandButton>
+                                    <b:column span="1">
+                                        <b:commandButton value="Buscar" action="#{documentReportController.getItemsSearchToWeeks()}" styleClass="pull-left" />
                                     </b:column>
                                     <b:column span="1">
+                                        <b:commandButton value="Limpiar" action="#{documentReportController.fillControlsExpire()}" styleClass="pull-left" immediate="true" />
+                                    </b:column>                                    
+                                    <b:column span="2">
                                     </b:column>
-                                </b:row><br />
+                                </b:row> <br/>
                                 <b:dataTable value="#{documentReportController.itemsToExpire}" var="item" responsive="true" lang="es" fixedHeader="true" scroll-size="400px">
                                     <b:dataTableColumn order="asc" label="Id documento">#{item.documentId}</b:dataTableColumn>
                                     <b:dataTableColumn label="Nombre de usuario">#{item.fullName}</b:dataTableColumn>

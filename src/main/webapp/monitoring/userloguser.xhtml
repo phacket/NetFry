@@ -12,21 +12,18 @@
                 <a href="menumonitoring.jsf"><button type="button" class="btn btn-return2">Regresar</button></a>
             </div>
             <div class="tbl-row">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
                     <div class="panel">
                         <div class="panel-heading">
                             <p class="panel-title text-center tittle-panel">LOG DE ACCESO AL PORTAL DE USUARIOS</p>
                         </div>
                         <div class="panel-body">
-                            <h:form>
-                                <p class="col-md-11">
-                                    <h:commandButton value="Limpiar" actionListener="#{userLogReportControllerAdmin.fillControls()}" styleClass="pull-right"></h:commandButton>
-                                </p>
-                            </h:form>
-                            <h:form>
+
+                            <h:form id="form">
                                 <b:row>
-                                    <div class="col-md-3">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-2">
                                         <div class="ui-fluid">
                                             <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank">
                                                 <p:calendar value="#{userLogReportControllerUser.startDate}"  style="form-control" locale="es" pattern="dd/MMMMM/yyyy"  navigator="true" 
@@ -36,7 +33,7 @@
                                             </p:panelGrid>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="ui-fluid">
                                             <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank">
                                                 <p:calendar id="v2" value="#{userLogReportControllerUser.endDate}" locale="es" pattern="dd/MMMMM/yyyy"  navigator="true"   
@@ -47,16 +44,17 @@
                                             </p:panelGrid>
                                         </div>
                                     </div>
-                                    <div class="col-md-1">
-                                        <h:outputText  value="Usuario:"></h:outputText>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <b:inputText placeholder="Nombre" value="#{userLogReportControllerUser.search}"></b:inputText>
+                                   
+                                    <div class="col-md-3">
+                                        <b:inputText placeholder="Nombre del usuario" value="#{userLogReportControllerUser.search}"></b:inputText>
                                     </div>
                                     <div class="col-md-1">
-                                        <h:commandButton value="Buscar"  styleClass="pull-left"  action="#{userLogReportControllerUser.getItemsSearch}"></h:commandButton>
+                                        <b:commandButton value="Buscar"  styleClass="pull-left"  action="#{userLogReportControllerUser.getItemsSearch}"></b:commandButton>
                                     </div>
-                                 
+
+                                    <div class="col-md-1">
+                                        <b:commandButton value="Limpiar" actionListener="#{userLogReportControllerAdmin.fillControls()}" styleClass="pull-right"></b:commandButton>
+                                    </div>
 
                                 </b:row><br />
                                 <b:dataTable value="#{userLogReportControllerUser.items}" var="item" responsive="true" lang="es" fixedHeader="true" scroll-size="400px">

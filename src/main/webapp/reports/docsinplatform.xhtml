@@ -26,11 +26,7 @@
                         <div class="col-md-1">
                         </div>
                         <div class="panel-body">
-                            <h:form >
-                                <p class="col-md-12">
-                                    <h:commandButton value="Limpiar"  styleClass="pull-right" action="#{documentReportController.fillControls()}"></h:commandButton>
-                                </p>
-                            </h:form>                            
+
                             <h:form>
                                 <b:row>
                                     <div class="col-md-2">
@@ -63,18 +59,17 @@
                                             <f:selectItem itemLabel="CMS" itemValue="2" class="size"/>
                                             <f:selectItem itemLabel="XMLSignature" itemValue="3" class="size"/>
                                         </b:selectOneMenu>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <h:outputText value="Documento:"></h:outputText>
-                                    </div>
+                                    </div>                                   
                                     <div class="col-md-2">
                                         <b:inputText value="#{documentReportController.search}" placeholder="Nombre de documento">
                                         </b:inputText>
                                     </div>
                                     <div class="col-md-1">
-                                        <h:commandButton value="Buscar"  styleClass="pull-right" action="#{documentReportController.getItemsSearch()}"></h:commandButton>
+                                        <b:commandButton value="Buscar" action="#{documentReportController.getItemsSearch()}"  styleClass="pull-left"/>
                                     </div>
-
+                                    <div class="col-md-1">
+                                        <b:commandButton value="Limpiar" actionListener="#{documentReportController.fillControls()}" styleClass="pull-right" immediate="true" />
+                                    </div>
                                 </b:row><br />
                                 <b:dataTable value="#{documentReportController.items}" var="item" responsive="true" lang="es" fixedHeader="true" scroll-size="400px">
                                     <b:dataTableColumn order="asc" label="Id documento">#{item.documentId}</b:dataTableColumn>
