@@ -244,7 +244,7 @@
                                                     </div>
                                                     <div class="col-md-7">
                                                         <b:message for="password2"/>
-                                                        <b:inputSecret value="#{usersController.selected.challengePrase}" id="password2" required="true" requiredMessage="La clave de anulación es mandatoria" binding="#{passtext2}" styleClass="pwd" onblur="ActivarRequerimiento('confirmanula')">
+                                                        <b:inputSecret value="#{usersController.selected.challengePrase}" id="password2" required="true" requiredMessage="La clave de anulación es mandatoria" binding="#{passtext2}" styleClass="pwd" onblur="ActivarRequerimiento()">
                                                             <f:validator validatorId="passwordValidation" />
                                                             <f:attribute name="confirm" value="#{confirmPassword2.submittedValue}" />
                                                         </b:inputSecret>
@@ -258,7 +258,7 @@
                                                     </div>
                                                     <div class="col-md-7">
                                                         <b:message for="confirm2"/>
-                                                        <b:inputSecret value="#{usersController.passwordValidate}" id="confirm2" binding="#{confirmPassword2}" required="true" requiredMessage="La validación de la clave es mandatoria" styleClass="pwd" onblur="ActivarRequerimiento('confirmanula')">
+                                                        <b:inputSecret value="#{usersController.passwordValidate}" id="confirm2" binding="#{confirmPassword2}" required="true" requiredMessage="La validación de la clave es mandatoria" styleClass="pwd" onkeyup="ActivarRequerimiento('confirmanula')" onblur="ActivarRequerimiento('confirmanula')">
                                                         </b:inputSecret>
                                                         <b:message id="m_confirm2" for="confirm2" />
                                                     </div>
@@ -270,7 +270,7 @@
                                                     </div>
                                                     <div class="col-md-7">
                                                         <b:message for="password"/>
-                                                        <b:inputSecret value="#{usersController.selected.password}" id="password" required="true" requiredMessage="La contraseña es mandatoria" binding="#{passtext}" styleClass="pwd" autocomplete="false" onblur="ActivarRequerimiento('confirm')">
+                                                        <b:inputSecret value="#{usersController.selected.password}" id="password" required="true" requiredMessage="La contraseña es mandatoria" binding="#{passtext}" styleClass="pwd" autocomplete="false" onblur="ActivarRequerimiento()">
                                                             <f:validator validatorId="passwordValidation" />
                                                             <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
                                                         </b:inputSecret>
@@ -284,7 +284,7 @@
                                                     </div>
                                                     <div class="col-md-7">
                                                         <b:message for="confirm"/>
-                                                        <b:inputSecret value="#{usersController.passwordValidate}" id="confirm" required="true" requiredMessage="La validación de la contraseña es mandatoria" binding="#{passtextConfirm}" styleClass="pwd" autocomplete="false" onblur="ActivarRequerimiento('confirm')">
+                                                        <b:inputSecret value="#{usersController.passwordValidate}" id="confirm" required="true" requiredMessage="La validación de la contraseña es mandatoria" binding="#{passtextConfirm}" styleClass="pwd" autocomplete="false" onkeyup="ActivarRequerimiento('confirm')" onblur="ActivarRequerimiento('confirm')">
                                                         </b:inputSecret>
                                                         <b:message id="m_confirm" for="confirm" />
                                                     </div>
